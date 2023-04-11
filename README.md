@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"> 
 <img src="https://rayfund.ru/wp-content/uploads/2015/05/logo_house.png" width="200" alt="Shelter Logo">
 </p>
@@ -34,3 +35,6 @@ ___
   - PostgreSQL
   - Liquibase
 ___
+=======
+# tBot
+>>>>>>> e7c69c7 (Create README.md)
