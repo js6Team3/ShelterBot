@@ -4,11 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+// @EnableScheduling
 public class TBotApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TBotApplication.class, args);
         System.out.println("JavaSprint6_Team3 Проект");
     }
-
 }
