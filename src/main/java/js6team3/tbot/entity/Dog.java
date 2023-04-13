@@ -1,11 +1,10 @@
-package js6team3.tbot.model;
+package js6team3.tbot.entity;
 
 import lombok.*;
 
 /**
  * Сущность: Собака
  * @author Юрий Калынбаев
- * @version 1.0.0
  */
 @Getter
 @Setter
