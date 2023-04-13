@@ -24,8 +24,8 @@ public class Dog {
     /** поле "breed" - порода */
     private String breed;
 
-    /** поле "yearOfBirth" - год рождения */
-    private int yearOfBirth;
+    /** поле "age" - возраст */
+    private int age;
 
     /** поле "description" - описание */
     private String description;
