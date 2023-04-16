@@ -2,8 +2,12 @@ package js6team3.tbot.entity;
 
 import lombok.*;
 
+import javax.persistence.*;
+import java.util.Collection;
+
 /**
- * Сущность: Кот
+ * Сущность: Cat
+ *
  * @author Юрий Калынбаев
  */
 @Getter
@@ -12,20 +16,43 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "cats")
 public class Cat {
 
-    /** поле "id" - идентификатор экземпляра класса */
+    /**
+     * поле "id" - идентификатор экземпляра класса
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    /** поле "nickname" - кличка */
+    /**
+     * поле "nickname" - кличка
+     */
+    @Column(name = "nick_name")
     private String nickname;
 
-    /** поле "breed" - порода */
+    /**
+     * поле "breed" - порода
+     */
+    @Column(name = "breed")
     private String breed;
 
-    /** поле "age" - возраст */
+    /**
+     * поле "age" - возраст
+     */
+    @Column(name = "age")
     private int age;
 
-    /** поле "description" - описание */
+    /**
+     * поле "description" - описание
+     */
+    @Column(name = "description")
     private String description;
+
+/** Связь "один ко многим" */
+//    @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL, orphanRemoval = true)
+//    Collection<User> user;
 }

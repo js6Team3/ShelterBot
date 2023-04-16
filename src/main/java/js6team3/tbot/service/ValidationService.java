@@ -10,7 +10,7 @@ import js6team3.tbot.entity.Dog;
 public interface ValidationService {
 
     /**
-     * Валидация экземпляра сущности "Кот"
+     * Валидация экземпляра сущности "Cat"
      *
      * @param cat объект для валидации
      * @return true - объект корректный
@@ -18,7 +18,7 @@ public interface ValidationService {
     public boolean validate(Cat cat);
 
     /**
-     * Валидация экземпляра сущности "Собака"
+     * Валидация экземпляра сущности "Dog"
      *
      * @param dog объект для валидации
      * @return true - объект корректный

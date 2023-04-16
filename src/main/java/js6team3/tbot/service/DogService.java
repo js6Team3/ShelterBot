@@ -6,12 +6,14 @@ import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.repository.CatRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
- * Сервис для работы с сущностью "Собака"
+ * Сервис для работы с сущностью "Dog"
  *
  * @author Юрий Калынбаев
  */
@@ -19,13 +21,15 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class DogService {
 
+//    private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+
     private final DogRepository dogRepository;
     private final ValidationService validationService;
 
     /**
-     * Получение полного списка экземпляров сущности "Собака"
+     * Получение полного списка экземпляров сущности "Dog"
      *
-     * @return список экземпляров сущности "Собака"
+     * @return список экземпляров сущности "Dog"
      */
     public Collection<Dog> getAllDogs() {
         return this.dogRepository.findAll();
@@ -34,7 +38,7 @@ public class DogService {
     /**
      * Метод сохраняет в БД созданный объект питомца.
      *
-     * @param dog экземпляр сущности "Собака"
+     * @param dog экземпляр сущности "Dog"
      * @throws ValidationException
      * @see DogRepository
      */
@@ -73,7 +77,7 @@ public class DogService {
      * Метод заменяет старые параметры питомца на те, что были переданы.
      *
      * @param id  дентификатор питомца в БД
-     * @param dog экземпляр сущности "Собака"
+     * @param dog экземпляр сущности "Dog"
      * @throws ValidationException
      * @see DogRepository
      */

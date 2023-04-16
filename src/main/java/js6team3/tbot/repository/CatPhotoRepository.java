@@ -1,13 +1,14 @@
 package js6team3.tbot.repository;
 
 import js6team3.tbot.entity.Cat;
+import js6team3.tbot.entity.CatPhoto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Репозиторий сущности "Cat"
+ * Репозиторий сущности "CatPhoto"
  * @author Юрий Калынбаев
  */
 @Repository
-public interface CatRepository extends JpaRepository<Cat, Long> {
+public interface CatPhotoRepository extends JpaRepository<CatPhoto, Long>  {
 }

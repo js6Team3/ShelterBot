@@ -5,12 +5,14 @@ import js6team3.tbot.entity.Cat;
 import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.repository.CatRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
- * Сервис для работы с сущностью "Кот"
+ * Сервис для работы с сущностью "Cat"
  *
  * @author Юрий Калынбаев
  */
@@ -18,13 +20,15 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class CatService {
 
+//    private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+
     private final CatRepository catRepository;
     private final ValidationService validationService;
 
     /**
-     * Получение полного списка экземпляров сущности "Кот"
+     * Получение полного списка экземпляров сущности "Cat"
      *
-     * @return список экземпляров сущности "Кот"
+     * @return список экземпляров сущности "Cat"
      */
     public Collection<Cat> getAllCats() {
         return this.catRepository.findAll();
@@ -33,7 +37,7 @@ public class CatService {
     /**
      * Метод сохраняет в БД созданный объект питомца.
      *
-     * @param cat экземпляр сущности "Кот"
+     * @param cat экземпляр сущности "Cat"
      * @throws ValidationException
      * @see CatRepository
      */
@@ -74,7 +78,7 @@ public class CatService {
      * При отсутствии одного из полей у передаваемого объекта cat будет выкинуто исключение NullPointerException.
      *
      * @param id  дентификатор питомца в БД
-     * @param cat экземпляр сущности "Кот"
+     * @param cat экземпляр сущности "Cat"
      * @throws ValidationException
      * @see CatRepository
      */
