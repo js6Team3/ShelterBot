@@ -6,7 +6,6 @@ import com.pengrad.telegrambot.model.Update;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,8 +13,11 @@ import java.util.List;
 public class TBotUpdatesListener implements UpdatesListener {
     private final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
-    @Autowired
-    private TelegramBot telegramBot;
+    private final TelegramBot telegramBot;
+
+    public TBotUpdatesListener(TelegramBot telegramBot) {
+        this.telegramBot = telegramBot;
+    }
 
     @PostConstruct
     public void init() {

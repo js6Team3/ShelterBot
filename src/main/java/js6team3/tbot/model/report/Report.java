@@ -1,4 +1,4 @@
-package js6team3.tbot.entity.report;
+package js6team3.tbot.model.report;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,6 +6,11 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 /**
+ * The adopter daily report of the animal content, incl.
+ * animal diet
+ * animal well-being and health at new environment
+ * animal change in behavior
+ * actual animal photo
  * Ежедневный отчет усыновителя о содержании животного
  * В ежедневный отчет входит следующая информация:
  * Рацион животного
@@ -26,7 +31,7 @@ public class Report {
     private Long id;
 
     //    reporting date & time (Дата и время предоставления отчета)
-    @Column(name = "day_time")
+    @Column(name = "report_time")
     private LocalDateTime dayTime;
 
     //  adopter number (id усыновителя)
@@ -46,14 +51,10 @@ public class Report {
     private String health;
 
     // change of animal's behavior (Изменение в поведении: отказ от старых привычек, приобретение новых)
-    @Column(name = "behaviour")
-    private String behaviour;
+    @Column(name = "behavior")
+    private String behavior;
 
-    // report comments (Коментарий усыновителя)
-    @Column(name = "comment")
-    private String comment;
-
-    // daily photo link (Связь c ежедневным фото животного)
+    // id daily photo link (Ежедневный отчет подтверждается ежедневным фото животного)
     @OneToOne
-    private ReportPhoto reportPhoto;
+    private Photo photo;
 }
