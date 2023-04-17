@@ -21,11 +21,13 @@ public class ReportServiceImpl implements ReportService {
         this.reportRepository = reportRepository;
     }
 
+    // Create daily report (созать отчет усыновителя)
     @Override
     public Report createReport(Report report) {
         return reportRepository.save(report);
     }
 
+    // Daily reports (отчеты усыновителей за день)
     @Override
     public Optional<Report> dailyReport() {
         List<Report> reports = reportRepository.getAll();

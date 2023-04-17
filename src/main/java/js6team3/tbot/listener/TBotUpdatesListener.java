@@ -2,13 +2,18 @@ package js6team3.tbot.listener;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.response.SendResponse;
 import jakarta.annotation.PostConstruct;
+import js6team3.tbot.constant.TBot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public class TBotUpdatesListener implements UpdatesListener {
     private final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
@@ -26,10 +31,28 @@ public class TBotUpdatesListener implements UpdatesListener {
 
     @Override
     public int process(List<Update> updates) {
-        updates.forEach(update -> {
-            logger.info("Processing update: {}", update);
-            // Process your updates here
-        });
+        try {
+            updates.forEach(update -> {
+                // Process your updates
+                logger.info("Processing update: {}", update);
+                Message message = update.message();
+                Long chatId = message.chat().id();
+                Long usrId = message.from().id();
+                String text = message.text();
+                if ("/start".equals(text)) {
+                    SendMessage sendMessage = new SendMessage(chatId,
+                            TBot.SELECT_MENU +
+                            "\n [Ваш chatId: " + chatId + " usrId: " + usrId + "]");
+                    SendResponse sendResponse = telegramBot.execute(sendMessage);
+                    if(!sendResponse.isOk()) {
+                        logger.error("Error: {}", sendResponse.description());
+                    }
+                }
+            });
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 }

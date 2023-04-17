@@ -1,5 +1,7 @@
 package js6team3.tbot.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import js6team3.tbot.model.report.Photo;
 import js6team3.tbot.model.report.PhotoResponse;
 import js6team3.tbot.service.PhotoService;
@@ -29,6 +31,10 @@ public class PhotoController {
     }
 
     @PostMapping
+    @Operation(summary = "Загрузка фотографии животного")
+    @ApiResponse(responseCode = "200", description = "Фото успешно загружено")
+    @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры некорректны")
+    @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка")
     public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
         try {
             photoService.save(file);
@@ -42,6 +48,10 @@ public class PhotoController {
     }
 
     @GetMapping
+    @Operation(summary = "Фотографии животных")
+    @ApiResponse(responseCode = "200", description = "Фото успешно загружено")
+    @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры некорректны")
+    @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка")
     public List<PhotoResponse> list() {
         return photoService.getAllFiles()
                 .stream()
@@ -65,6 +75,10 @@ public class PhotoController {
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Получить фотографию животного по id")
+    @ApiResponse(responseCode = "200", description = "Фото успешно загружено")
+    @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры некорректны")
+    @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         Optional<Photo> fileEntityOptional = photoService.getFile(id);
 
