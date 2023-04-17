@@ -3,7 +3,7 @@ package js6team3.tbot.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import js6team3.tbot.model.report.Report;
+import js6team3.tbot.entity.report.Report;
 import js6team3.tbot.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

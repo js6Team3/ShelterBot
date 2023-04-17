@@ -1,6 +1,6 @@
 package js6team3.tbot.service.impl;
 
-import js6team3.tbot.model.report.Report;
+import js6team3.tbot.entity.report.Report;
 import js6team3.tbot.repository.ReportRepository;
 import js6team3.tbot.service.ReportService;
 import org.springframework.stereotype.Service;

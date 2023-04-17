@@ -1,4 +1,4 @@
-package js6team3.tbot.model.report;
+package js6team3.tbot.entity.report;
 
 import jakarta.persistence.*;
 import lombok.*;

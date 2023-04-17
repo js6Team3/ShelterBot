@@ -2,8 +2,8 @@ package js6team3.tbot.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import js6team3.tbot.model.report.Photo;
-import js6team3.tbot.model.report.PhotoResponse;
+import js6team3.tbot.entity.report.Photo;
+import js6team3.tbot.entity.report.PhotoResponse;
 import js6team3.tbot.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

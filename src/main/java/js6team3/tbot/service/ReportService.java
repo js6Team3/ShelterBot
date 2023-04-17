@@ -1,6 +1,6 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.model.report.Report;
+import js6team3.tbot.entity.report.Report;
 
 import java.io.IOException;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package js6team3.tbot.service.impl;
 
-import js6team3.tbot.model.report.Photo;
+import js6team3.tbot.entity.report.Photo;
 import js6team3.tbot.repository.PhotoRepository;
 import js6team3.tbot.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
