@@ -1,13 +1,10 @@
-package js6team3.tbot.model;
+package js6team3.tbot.entity;
 
 import lombok.*;
-
-import java.util.Objects;
 
 /**
  * Сущность: Кот
  * @author Юрий Калынбаев
- * @version 1.0.0
  */
 @Getter
 @Setter
