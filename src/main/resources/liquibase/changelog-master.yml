@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - include:
+      file1: liquibase/scripts/cats.sql
+      file2: liquibase/scripts/dogs.sql
+      file3: liquibase/scripts/cat-photo.sql
+      file4: liquibase/scripts/dog-photo.sql

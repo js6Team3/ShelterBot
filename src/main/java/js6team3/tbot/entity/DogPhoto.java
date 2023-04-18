@@ -1,6 +1,8 @@
 package js6team3.tbot.entity;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 
@@ -54,6 +56,8 @@ public class DogPhoto {
     /**
      * Связь "один к одному"
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OrderBy
     private Dog dog;
 }

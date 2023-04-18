@@ -1,6 +1,8 @@
 package js6team3.tbot.entity;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -52,7 +54,16 @@ public class Cat {
     @Column(name = "description")
     private String description;
 
-/** Связь "один ко многим" */
+    /**
+     * Связь "один ко многим"
+     */
 //    @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @LazyCollection(LazyCollectionOption.TRUE)
+//    @OrderBy
 //    Collection<User> user;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cat", orphanRemoval = true, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OrderBy
+    private CatPhoto catPhoto;
 }

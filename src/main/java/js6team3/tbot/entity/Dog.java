@@ -1,6 +1,8 @@
 package js6team3.tbot.entity;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 
@@ -52,5 +54,14 @@ public class Dog {
     private String description;
 
 //    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @LazyCollection(LazyCollectionOption.TRUE)
+//    @OrderBy
 //   Collection<User> user;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy="dog", orphanRemoval = true, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OrderBy
+    private DogPhoto dogPhoto;
+
+
 }

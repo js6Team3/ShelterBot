@@ -36,6 +36,17 @@ public class DogService {
     }
 
     /**
+     * Метод возвращает из БД питомца по идентификатору id
+     * @param id идентификатор питомца в БД
+     * @return getDog
+     * @see DogRepository
+     */
+    public Dog getDogById(Long id) {
+        Dog getDog = dogRepository.findById(id).orElse(null);
+        return getDog;
+    }
+
+    /**
      * Метод сохраняет в БД созданный объект питомца.
      *
      * @param dog экземпляр сущности "Dog"
