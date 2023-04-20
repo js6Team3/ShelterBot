@@ -9,9 +9,13 @@ import java.util.Optional;
 
 /**
  * Service for managing daily photo files
+ *
+ * @author Andrei Popov
  */
 public interface PhotoService {
     void save(MultipartFile file) throws IOException;
+
     Optional<Photo> getFile(String id);
+
     List<Photo> getAllFiles();
 }

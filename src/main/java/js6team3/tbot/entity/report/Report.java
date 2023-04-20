@@ -1,8 +1,10 @@
 package js6team3.tbot.entity.report;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -11,6 +13,9 @@ import java.time.LocalDateTime;
  * animal well-being and health at new environment
  * animal change in behavior
  * actual animal photo
+ *
+ * @author Andrei Popov
+ *
  * Ежедневный отчет усыновителя о содержании животного
  * В ежедневный отчет входит следующая информация:
  * Рацион животного

@@ -1,11 +1,8 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Dog;
-import js6team3.tbot.exception.CatNullParameterValueException;
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.repository.CatRepository;
-import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +33,7 @@ public class CatService {
 
     /**
      * Метод возвращает из БД питомца по идентификатору id
+     *
      * @param id идентификатор питомца в БД
      * @return getCat
      * @see CatRepository

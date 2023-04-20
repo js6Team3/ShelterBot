@@ -1,8 +1,10 @@
 package js6team3.tbot.constant;
 
 /**
- *  Standard messages at adaptation stage
- *  (Типовые ответы бота усыновителю на этапе адаптации)
+ * Standard messages at adaptation stage
+ *
+ * @author Andrei Popov
+ * (Типовые ответы бота усыновителю на этапе адаптации)
  */
 public class Report {
     // result of an animal adaptation (Решение по результатам адаптации животного у усыновителя)

@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ *
+ * @author Andrei Popov
+ */
 @Component
 public class TBotUpdatesListener implements UpdatesListener {
     private final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
@@ -41,9 +45,13 @@ public class TBotUpdatesListener implements UpdatesListener {
                 String text = message.text();
                 if ("/start".equals(text)) {
                     SendMessage sendMessage = new SendMessage(chatId,
-                            TBot.SELECT_MENU +
+                            TBot.GREETING +
                             "\n [Ваш chatId: " + chatId + " usrId: " + usrId + "]");
                     SendResponse sendResponse = telegramBot.execute(sendMessage);
+
+                    sendMessage = new SendMessage(chatId, TBot.SELECT_MENU);
+                    sendResponse = telegramBot.execute(sendMessage);
+
                     if(!sendResponse.isOk()) {
                         logger.error("Error: {}", sendResponse.description());
                     }

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Implement data access layer
+ *
+ * @author Andrei Popov
  */
 @Repository
-public interface PhotoRepository extends JpaRepository<Photo,String> {
+public interface PhotoRepository extends JpaRepository<Photo, String> {
 }

@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Service for managing daily adopter's report.
+ * Service for managing daily adopter's report
+ *
+ * @author Andrei Popov
  * (Отправка ежедневного отчета усыновителя в течение месяца до принятия решения об усыновлении
  * Каждый день волонтеры отсматривают все присланные отчеты после 21:00.)
  */

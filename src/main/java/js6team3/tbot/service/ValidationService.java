@@ -5,6 +5,7 @@ import js6team3.tbot.entity.Dog;
 
 /**
  * Сервис валидации
+ *
  * @author Юрий Калынбаев
  */
 public interface ValidationService {

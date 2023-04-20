@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Репозиторий сущности "Cat"
+ *
  * @author Юрий Калынбаев
  */
 @Repository

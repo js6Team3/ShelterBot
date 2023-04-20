@@ -15,6 +15,8 @@ import java.util.Optional;
 
 /**
  * Service for managing daily photo files from Report Photo Repository
+ *
+ * @author Andrei Popov
  * (Ежедневно усыновитель направляет в приют фото состояния животного)
  */
 @Service

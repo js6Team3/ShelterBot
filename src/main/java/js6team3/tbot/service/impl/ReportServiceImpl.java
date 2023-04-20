@@ -11,6 +11,8 @@ import java.util.Optional;
 
 /**
  * Service that will be calling methods from Daily Report Repository
+ *
+ * @author Andrei Popov
  * (Ежедневно усыновитель направляет в приют отчет о состоянии животного)
  */
 @Service

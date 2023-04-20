@@ -7,7 +7,9 @@ import java.util.List;
 
 /**
  * Implement report access layer
+ *
+ * @author Andrei Popov
  */
-public interface ReportRepository extends JpaRepository<Report,Long> {
+public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> getAll();
 }

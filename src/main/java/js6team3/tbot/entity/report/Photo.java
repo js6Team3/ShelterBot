@@ -1,15 +1,18 @@
 package js6team3.tbot.entity.report;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Animal daily photo: file name and path, file size (Ежедневная фотография животного: имя, путь и размер фото)
+ * Animal daily photo: file name and path, file size
+ *
+ * @author Andrei Popov
+ * (Ежедневная фотография животного: имя, путь и размер фото)
  */
 @Data
 @AllArgsConstructor
@@ -24,7 +27,9 @@ public class Photo {
     @Column(name = "id", nullable = false)
     private String id;
 
-    // animal id (id животного)
+    /**
+     * animal id (id животного)
+     */
     @Column(name = "animal_id")
     private Long animalId;
 

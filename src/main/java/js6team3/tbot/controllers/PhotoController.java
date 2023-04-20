@@ -20,11 +20,15 @@ import java.util.stream.Collectors;
 
 /**
  * a REST controller for handing HTTP requests POST (for uploading photo), GET (for listing and downloading photo)
+ *
+ * @author Andrei Popov
+ * Контроллер ежедневных фото животных отчета усыновителей приюту
  */
 @RestController
 @RequestMapping("/api/photo")
 public class PhotoController {
     private final PhotoService photoService;
+
     @Autowired
     public PhotoController(PhotoService photoService) {
         this.photoService = photoService;

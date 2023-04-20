@@ -1,5 +1,12 @@
 package js6team3.tbot.constant;
 
+/**
+ * The Bot menu
+ * Constant: TBot
+ *
+ * @author Andrei Popov
+ * (Типовые меню бота)
+ */
 public class TBot {
     // standard first greeting (Приветсвтие нового пользователя при подключении к боту)
     public static final String GREETING = """

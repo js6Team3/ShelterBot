@@ -1,13 +1,9 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.Dog;
 import js6team3.tbot.exception.ValidationException;
-import js6team3.tbot.repository.CatRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -37,6 +33,7 @@ public class DogService {
 
     /**
      * Метод возвращает из БД питомца по идентификатору id
+     *
      * @param id идентификатор питомца в БД
      * @return getDog
      * @see DogRepository

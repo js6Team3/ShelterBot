@@ -1,9 +1,11 @@
-package js6team3.tbot.model;
+package js6team3.tbot.entity;
+
 import javax.persistence.*;
 
 
 /**
  * Entity: User
+ *
  * @author Loginova Viktoria
  * @version 1.0.0
  */
@@ -33,6 +35,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "cat_id")
     private Cat cat;
+
     public Long getId() {
         return id;
     }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Репозиторий сущности "Dog"
+ *
  * @author Юрий Калынбаев
  */
 @Repository

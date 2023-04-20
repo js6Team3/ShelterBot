@@ -1,10 +1,14 @@
-package js6team3.tbot.service;
+package js6team3.tbot.service.impl;
 
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.Dog;
+import js6team3.tbot.service.ValidationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ */
 @Service
 public class ValidationServiceImpl implements ValidationService {
     @Override

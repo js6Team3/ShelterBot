@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * The TBot configuration and connect
+ *
+ * @author Dmitry Bezin
+ */
 @Configuration
 public class TBotConfiguration {
     @Value("${telegram.bot.token}")

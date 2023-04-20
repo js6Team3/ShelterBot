@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 /**
  * a POJO object used to listing photo
+ *
+ * @author Andrei Popov
  */
 @Data
 @AllArgsConstructor

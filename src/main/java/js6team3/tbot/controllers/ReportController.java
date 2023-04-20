@@ -14,7 +14,9 @@ import java.util.Optional;
 
 /**
  * a REST controller for handle HTTP requests POST, GET
- * Контроллер отчетов усыновителей JSON
+ *
+ * @author Andrei Popov
+ * Контроллер отчетов усыновителей
  */
 
 @RestController
