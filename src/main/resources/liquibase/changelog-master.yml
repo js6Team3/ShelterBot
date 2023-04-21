@@ -1,7 +1,7 @@
 databaseChangeLog:
   - include:
-      file1: liquibase/scripts/init-cat.sql
-      file2: liquibase/scripts/init-dog.sql
-      file3: liquibase/scripts/init-cat_photo.sql
-      file4: liquibase/scripts/init-dog_photo.sql
-      file5: liquibase/scripts/init-users.sql
+        init-cat: liquibase/scripts/init-cat.sql
+        init-dog: liquibase/scripts/init-dog.sql
+        init-cat_photo: liquibase/scripts/init-cat_photo.sql
+        init-dog_photo: liquibase/scripts/init-dog_photo.sql
+        init-users: liquibase/scripts/init-users.sql
