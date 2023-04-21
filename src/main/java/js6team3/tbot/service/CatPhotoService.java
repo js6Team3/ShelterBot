@@ -2,6 +2,7 @@ package js6team3.tbot.service;
 
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.CatPhoto;
+import js6team3.tbot.listener.TBotUpdatesListener;
 import js6team3.tbot.repository.CatPhotoRepository;
 import js6team3.tbot.repository.CatRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @RequiredArgsConstructor
 public class CatPhotoService {
 
-//    private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
     private final CatRepository catRepository;
     private final CatPhotoRepository catPhotoRepository;
@@ -50,12 +51,12 @@ public class CatPhotoService {
      * @throws IOException - может возникнуть исключение ввода/вывода
      */
     public CatPhoto uploadPhotoCat(Long id, MultipartFile file) throws IOException {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         Cat cat = catRepository.findById(id).orElseThrow();
         Path filePath = Path.of(PhotoCatDir, id + "." + getExtensions(file.getOriginalFilename()));
         /** создаем директорию, если её нет */
@@ -87,12 +88,12 @@ public class CatPhotoService {
      * @return Возвращает имя файла
      */
     public String getExtensions(String fileName) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
@@ -104,12 +105,12 @@ public class CatPhotoService {
      * @return Возвращает найденного питомца
      */
     public Cat findCatById(Long catId) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         return catRepository.findById(catId).orElseThrow();
     }
 
@@ -122,12 +123,12 @@ public class CatPhotoService {
      * @throws IOException - может возникнуть исключение ввода/вывода
      */
     public CatPhoto findPhotoCat(Long catId) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         return catPhotoRepository.findById(catId).orElseThrow();
     }
 }
