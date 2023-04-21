@@ -4,11 +4,14 @@ import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.CatPhoto;
 import js6team3.tbot.entity.Dog;
 import js6team3.tbot.entity.DogPhoto;
+import js6team3.tbot.listener.TBotUpdatesListener;
 import js6team3.tbot.repository.CatPhotoRepository;
 import js6team3.tbot.repository.CatRepository;
 import js6team3.tbot.repository.DogPhotoRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -29,12 +32,12 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @RequiredArgsConstructor
 public class DogPhotoService {
 
-//    private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
     private final DogRepository dogRepository;
     private final DogPhotoRepository dogPhotoRepository;
 
-    @Value("${dir.path.PhotoDog")
+    @Value("${dir.path.PhotoDog}")
     /**
      * "PhotoDogDir" - директория фото сущности Dog
      */
@@ -51,12 +54,12 @@ public class DogPhotoService {
      * @throws IOException - может возникнуть исключение ввода/вывода
      */
     public DogPhoto uploadPhotoDog(Long id, MultipartFile file) throws IOException {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         Dog dog = dogRepository.findById(id).orElseThrow();
         Path filePath = Path.of(PhotoDogDir, id + "." + getExtensions(file.getOriginalFilename()));
         /** создаем директорию, если её нет */
@@ -88,12 +91,12 @@ public class DogPhotoService {
      * @return Возвращает имя файла
      */
     public String getExtensions(String fileName) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
@@ -105,12 +108,12 @@ public class DogPhotoService {
      * @return Возвращает найденного питомца
      */
     public Dog findDogById(Long dogId) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         return dogRepository.findById(dogId).orElseThrow();
     }
 
@@ -123,12 +126,12 @@ public class DogPhotoService {
      * @throws IOException - может возникнуть исключение ввода/вывода
      */
     public DogPhoto findPhotoDog(Long dogId) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         return dogPhotoRepository.findById(dogId).orElseThrow();
     }
 }

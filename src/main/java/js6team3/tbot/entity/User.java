@@ -1,4 +1,4 @@
-package js6team3.tbot.model;
+package js6team3.tbot.entity;
 import javax.persistence.*;
 
 
@@ -7,7 +7,8 @@ import javax.persistence.*;
  * @author Loginova Viktoria
  * @version 1.0.0
  */
-
+@Entity                 // добавил Ю.Калынбаев
+@Table(name = "users") // добавил Ю.Калынбаев
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +31,12 @@ public class User {
     @JoinColumn(name = "dog_id")
     private Dog dog;
 
+    // добавил Ю.Калынбаев
     @ManyToOne
     @JoinColumn(name = "cat_id")
     private Cat cat;
+    // добавил Ю.Калынбаев
+
     public Long getId() {
         return id;
     }

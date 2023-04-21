@@ -4,9 +4,12 @@ import js6team3.tbot.entity.Dog;
 import js6team3.tbot.exception.CatNullParameterValueException;
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.exception.ValidationException;
+import js6team3.tbot.listener.TBotUpdatesListener;
 import js6team3.tbot.repository.CatRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -20,7 +23,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class CatService {
 
-//    private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
     private final CatRepository catRepository;
     private final ValidationService validationService;
@@ -36,6 +39,7 @@ public class CatService {
 
     /**
      * Метод возвращает из БД питомца по идентификатору id
+     *
      * @param id идентификатор питомца в БД
      * @return getCat
      * @see CatRepository
@@ -53,12 +57,12 @@ public class CatService {
      * @see CatRepository
      */
     public Cat createCatInDB(Cat cat) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Текущий метод - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         if (!validationService.validate(cat)) {
             throw new ValidationException(cat.toString());
         }
@@ -72,12 +76,12 @@ public class CatService {
      * @see CatRepository
      */
     public Cat deleteCatById(Long id) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         Cat deleteCat = catRepository.findById(id).orElse(null);
         catRepository.deleteById(id);
         return deleteCat;
@@ -85,21 +89,20 @@ public class CatService {
 
     /**
      * Метод заменяет старые параметры питомца на те, что были переданы.
-     * Если объект по id не найден, то будет выкинуто исключение CatNullParameterValueException.
-     * При отсутствии одного из полей у передаваемого объекта cat будет выкинуто исключение NullPointerException.
      *
-     * @param id  дентификатор питомца в БД
+     * @param id  идентификатор питомца в БД
      * @param cat экземпляр сущности "Cat"
      * @throws ValidationException
      * @see CatRepository
+     * @see Cat
      */
     public Cat replaceCatById(Long id, Cat cat) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         Cat replaceCat = catRepository.findById(id).orElse(null);
         if (!validationService.validate(replaceCat)) {
             throw new ValidationException(cat.toString());

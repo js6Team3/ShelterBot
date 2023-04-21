@@ -2,9 +2,11 @@ package js6team3.tbot.service;
 
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.Dog;
+import js6team3.tbot.entity.User;
 
 /**
  * Сервис валидации
+ *
  * @author Юрий Калынбаев
  */
 public interface ValidationService {
@@ -24,5 +26,14 @@ public interface ValidationService {
      * @return true - объект корректный
      */
     public boolean validate(Dog dog);
+
+    /**
+     * Валидация экземпляра сущности "User"
+     *
+     * @param user объект для валидации
+     * @return true - объект корректный
+     */
+    public boolean validate(User user);
+
 
 }

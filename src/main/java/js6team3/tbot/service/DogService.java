@@ -3,6 +3,7 @@ package js6team3.tbot.service;
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.Dog;
 import js6team3.tbot.exception.ValidationException;
+import js6team3.tbot.listener.TBotUpdatesListener;
 import js6team3.tbot.repository.CatRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class DogService {
 
-//    private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
     private final DogRepository dogRepository;
     private final ValidationService validationService;
@@ -37,6 +38,7 @@ public class DogService {
 
     /**
      * Метод возвращает из БД питомца по идентификатору id
+     *
      * @param id идентификатор питомца в БД
      * @return getDog
      * @see DogRepository
@@ -54,12 +56,12 @@ public class DogService {
      * @see DogRepository
      */
     public Dog createDogInDB(Dog dog) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Текущий метод - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         if (!validationService.validate(dog)) {
             throw new ValidationException(dog.toString());
         }
@@ -73,12 +75,12 @@ public class DogService {
      * @see DogRepository
      */
     public Dog deleteDogById(Long id) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         Dog deleteDog = dogRepository.findById(id).orElse(null);
         dogRepository.deleteById(id);
         return deleteDog;
@@ -87,18 +89,19 @@ public class DogService {
     /**
      * Метод заменяет старые параметры питомца на те, что были переданы.
      *
-     * @param id  дентификатор питомца в БД
+     * @param id  идентификатор питомца в БД
      * @param dog экземпляр сущности "Dog"
      * @throws ValidationException
      * @see DogRepository
+     * @see Dog
      */
     public Dog replaceDogById(Long id, Dog dog) {
-//        String methodName = new Object() {
-//        }
-//                .getClass()
-//                .getEnclosingMethod()
-//                .getName();
-//        logger.info("Current Method is - " + methodName);
+        String methodName = new Object() {
+        }
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+        logger.info("Текущий метод - " + methodName);
         Dog replaceDog = dogRepository.findById(id).orElse(null);
         if (!validationService.validate(replaceDog)) {
             throw new ValidationException(dog.toString());

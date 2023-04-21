@@ -57,11 +57,14 @@ public class Cat {
     /**
      * Связь "один ко многим"
      */
-//    @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @LazyCollection(LazyCollectionOption.TRUE)
-//    @OrderBy
-//    Collection<User> user;
+    @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OrderBy
+    Collection<User> user;
 
+    /**
+     * Связь "один к одному"
+     */
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cat", orphanRemoval = true, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.TRUE)
     @OrderBy
