@@ -26,6 +26,7 @@ public class CatPhoto {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderBy
     @Column(name = "id", nullable = false)
     private long id;
 
@@ -45,19 +46,19 @@ public class CatPhoto {
      * поле "MediaType" - тип файла
      */
     @Column(name = "media_type")
-    private String MediaType;      // Тип файла
+    private String MediaType;
 
     /**
      * поле "photoCat" - массив для хранения фотографии
      */
     @Lob
-    private byte[] photoCat;       // Массив для хранения фотографии
+    @Column(name = "photo_cat")
+    private byte[] photoCat;
 
     /**
      * Связь "один к одному"
      */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.TRUE)
-    @OrderBy
     private Cat cat;
 }

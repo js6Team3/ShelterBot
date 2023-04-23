@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.CatPhoto;
+import js6team3.tbot.entity.Dog;
 import js6team3.tbot.service.CatPhotoService;
 import js6team3.tbot.service.CatService;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collection;
 
 /**
  * Сущность: CatController
@@ -31,7 +31,7 @@ import java.util.Collection;
  * @author Юрий Калынбаев
  */
 @RestController
-@RequestMapping("/cat")
+@RequestMapping("/cats")
 @Tag(name = "API для работы с сущностью Cat", description = "CRUD-операции для сущности Cat")
 public class CatController {
 
@@ -50,7 +50,7 @@ public class CatController {
     }
 
     /**
-     * создание записи о новом питомце
+     * создание новой записи о питомце
      */
     @Operation(summary = "Внесение данных о новом питомце\"",
             responses = {@ApiResponse(
@@ -59,44 +59,10 @@ public class CatController {
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = Cat.class))
-                    )),
-                    @ApiResponse(responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
-            })
+                    ))})
     @PostMapping("/create")
-    public ResponseEntity<Cat> createCat(@RequestBody Cat cat) {
-        return ResponseEntity.ok(this.catService.createCatInDB(cat));
-//    public Cat createCat(@RequestBody Cat cat) {
-//        return this.catService.createCatInDB(cat);
-    }
-
-
-    /**
-     * Получение списка всех питомцев сущности "Cat"
-     */
-    @Operation(
-            summary = "Получение списка всех питомцев",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список питомцев",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Cat.class))
-                            )
-                    ),
-                    @ApiResponse(responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
-            })
-    @GetMapping("/getAll")
-    public ResponseEntity<Collection<Cat>> getAllCats() {
-        return ResponseEntity.ok(this.catService.getAllCats());
-
-//    public Collection<Cat> getAllCats() {
-//        return this.catService.getAllCats();
+    public Cat createCat(@RequestBody Cat cat) {
+        return this.catService.createCatInDB(cat);
     }
 
     /**
@@ -113,22 +79,15 @@ public class CatController {
                     )),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс"
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
+                            description = "Не найден запрашиваемый ресурс",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = Cat.class))
+                            ))
             })
     @GetMapping("/get/{id}")
-    public ResponseEntity<Cat> getCatById(@Parameter(description = "Id питомца", example = "1")
-                                          @PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.catService.getCatById(id));
-
-//    public Cat getCatById(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id) {
-//        return this.catService.getCatById(id);
+    public Cat getCatById(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id) {
+        return this.catService.getCatById(id);
     }
 
     /**
@@ -141,27 +100,11 @@ public class CatController {
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = Cat.class))
-                    )),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс"
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
-            })
+                    ))})
     @PutMapping("/update/{id}")
-    public ResponseEntity<Cat> updateCat(@Parameter(description = "Id питомца", example = "1")
-                                         @PathVariable("id") Long id,
-                                         @RequestBody Cat cat) {
-        return ResponseEntity.ok(this.catService.replaceCatById(id, cat));
-
-//    public Cat updateCat(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id,
-//                         @RequestBody Cat cat) {
-//        return this.catService.replaceCatById(id, cat);
+    public Cat updateCat(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id,
+                         @RequestBody Cat cat) {
+        return this.catService.replaceCatById(id, cat);
     }
 
     /**
@@ -172,24 +115,11 @@ public class CatController {
                     responseCode = "200",
                     description = "Информация о питомце удалена",
                     content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Cat.class))
-                    )),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
-            })
+                            mediaType = MediaType.APPLICATION_JSON_VALUE
+                    ))})
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Cat> deleteCat(@Parameter(description = "Id питомца", example = "1")
-                                         @PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.catService.deleteCatById(id));
-
-//        public Cat deleteCat(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id) {
-//            return this.catService.deleteCatById(id);
-
+    public Cat deleteCat(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id) {
+        return this.catService.deleteCatById(id);
     }
 
     /**
@@ -201,14 +131,7 @@ public class CatController {
                     description = "Фотография загружена",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE
-                    )),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
-            })
+                    ))})
 
     @PostMapping(value = "/{id}/load/PhotoCat", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     /**
@@ -237,14 +160,7 @@ public class CatController {
                     description = "Фотография найдена",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE
-                    )),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
-            })
+                    ))})
     @GetMapping(value = "/{id}/fotoCat")
     public void downloadPhotoCat(@Parameter(description = "Id питомца", example = "1") @PathVariable Long id,
                                  HttpServletResponse response) throws IOException {

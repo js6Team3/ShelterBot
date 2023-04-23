@@ -1,9 +1,11 @@
 package js6team3.tbot.entity;
+
 import javax.persistence.*;
 
 
 /**
  * Entity: User
+ *
  * @author Loginova Viktoria
  * @version 1.0.0
  */
@@ -12,6 +14,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderBy
     @Column(name = "id")
     private Long id;                 // Identifier
 
@@ -27,11 +30,11 @@ public class User {
     @Column(name = "user_email")
     private String userEmail;        // User e-mail
 
+
+    // добавил Ю.Калынбаев
     @ManyToOne
     @JoinColumn(name = "dog_id")
     private Dog dog;
-
-    // добавил Ю.Калынбаев
     @ManyToOne
     @JoinColumn(name = "cat_id")
     private Cat cat;
