@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changelog/scripts/init-pets.sql
+  - include:
+      file: liquibase/changelog/scripts/init-users.sql

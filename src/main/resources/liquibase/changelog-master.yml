@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - include:
-        init-cat: liquibase/scripts/init-cat.sql
-        init-dog: liquibase/scripts/init-dog.sql
-        init-cat_photo: liquibase/scripts/init-cat_photo.sql
-        init-dog_photo: liquibase/scripts/init-dog_photo.sql
-        init-users: liquibase/scripts/init-users.sql

@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Сущность: Cat
@@ -27,6 +28,7 @@ public class Cat {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderBy
     @Column(name = "id", nullable = false)
     private long id;
 
@@ -59,14 +61,5 @@ public class Cat {
      */
     @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.TRUE)
-    @OrderBy
-    Collection<User> user;
-
-    /**
-     * Связь "один к одному"
-     */
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cat", orphanRemoval = true, fetch = FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.TRUE)
-    @OrderBy
-    private CatPhoto catPhoto;
+    List<User> user;
 }

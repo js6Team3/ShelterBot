@@ -7,11 +7,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.User;
 import js6team3.tbot.service.UserService;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -44,20 +42,12 @@ public class UserController {
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     array = @ArraySchema(schema = @Schema(implementation = User.class))
                             )
-                    ),
-                    @ApiResponse(responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
+                    )
             })
     @GetMapping("/getAll")
-    public ResponseEntity<Collection<User>> getAllUsers() {
-        return ResponseEntity.ok(this.userService.getAllUsers());
+    public Collection<User> getAllUsers() {
+        return this.userService.getAllUsers();
     }
-
-//    public Collection<User> getAllUsers() {
-//        return this.userService.getAllUsers();
-//    }
 
     /**
      * чтение записи о пользователе
@@ -73,24 +63,16 @@ public class UserController {
                     )),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс"
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
+                            description = "Не найден запрашиваемый ресурс",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = User.class))
+                            ))
             })
     @GetMapping("/get/{id}")
-    public ResponseEntity<User> getUserById(@Parameter(description = "Id пользователя", example = "1")
-                                            @PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.userService.getUserById(id));
+    public User getUserById(@Parameter(description = "Id пользователя", example = "1") @PathVariable("id") Long id) {
+        return this.userService.getUserById(id);
     }
-
-//    public User getUserById(@Parameter(description = "Id пользователя", example = "1") @PathVariable("id") Long id) {
-//        return this.userService.getUserById(id);
-//    }
 
     /**
      * создание записи о новом пользователе
@@ -106,25 +88,22 @@ public class UserController {
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     array = @ArraySchema(schema = @Schema(implementation = User.class))
                             )),
-                    @ApiResponse(responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Ошибка со стороны сервиса(Так же при неполных данных пользователя)"
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Ошибка при внесении пользователя в базу из-за неверного формата данных"
+                    )
             })
     @PostMapping("/create")
-    public ResponseEntity<User> createUserInDb(@Parameter(
+    public User createUserInDb(@Parameter(
             description = "Полные данные пользователя",
             example = "{firstName: Name, lastName : LastName, userPhoneNumber : +75558804420, userEmail: mail@mail.ru}")
-                                               @RequestBody User user) {
-        return ResponseEntity.ok(this.userService.createUserInDb(user));
+                               @RequestBody User user) {
+        return this.userService.createUserInDb(user);
     }
-
-//    public User createUserInDb(@Parameter(
-//            description = "Полные данные пользователя",
-//            example = "{firstName: Name, lastName : LastName, userPhoneNumber : +75558804420, userEmail: mail@mail.ru}")
-//                               @RequestBody User user) {
-//        return this.userService.createUserInDb(user);
-//    }
 
     /**
      * удаление данных о пользователе
@@ -141,24 +120,16 @@ public class UserController {
                                     array = @ArraySchema(schema = @Schema(implementation = User.class))
                             )),
                     @ApiResponse(
-                            responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
                             responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
+                            description = "Пользователь не найден в базе"
+                    )
             })
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<User> deleteUser(@Parameter(
+    public User deleteUser(@Parameter(
             description = "Id пользователя, которого необходимо удалить",
             example = "1") @PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.userService.deleteUserById(id));
+        return this.userService.deleteUserById(id);
     }
-
-//    public User deleteUser(@Parameter(
-//            description = "Id пользователя, которого необходимо удалить",
-//            example = "1") @PathVariable("id") Long id) {
-//        return this.userService.deleteUserById(id);
-//    }
 
     /**
      * изменение данных о пользователе
@@ -176,37 +147,23 @@ public class UserController {
                                     array = @ArraySchema(schema = @Schema(implementation = User.class))
                             )),
                     @ApiResponse(
-                            responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс"
+                            responseCode = "500",
+                            description = "Недостаточно данных для обновления объекта users или объект с таким id не найден"
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "параметры запроса отсутствуют или имеют некорректный формат"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "произошла ошибка, не зависящая от вызывающей стороны")
+                            description = "Ошибка при обновлении объекта users из-за неверного формата данных"
+                    )
             })
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateUser(@Parameter(
+    public User updateUser(@Parameter(
             description = "Id пользователя",
             example = "1") @PathVariable("id") Long id,
-                                           @Parameter(
-                                                   description = "Полные данные пользователя",
-                                                   example = "{firstName: Name, lastName : LastName," +
-                                                           " userPhoneNumber : +75558804420, userEmail: mail@mail.ru}")
-                                           @RequestBody User user) {
-        return ResponseEntity.ok(this.userService.replaceUserById(id, user));
+                           @Parameter(
+                                   description = "Полные данные пользователя",
+                                   example = "{firstName: Name, lastName : LastName," +
+                                           " userPhoneNumber : +75558804420, userEmail: mail@mail.ru}")
+                           @RequestBody User user) {
+        return this.userService.replaceUserById(id, user);
     }
-
-//    public User updateUser(@Parameter(
-//            description = "Id пользователя",
-//            example = "1") @PathVariable("id") Long id,
-//                           @Parameter(
-//                                   description = "Полные данные пользователя",
-//                                   example = "{firstName: Name, lastName : LastName," +
-//                                           " userPhoneNumber : +75558804420, userEmail: mail@mail.ru}")
-//                           @RequestBody User user) {
-//        return this.userService.replaceUserById(id, user);
-//    }
-
 }
