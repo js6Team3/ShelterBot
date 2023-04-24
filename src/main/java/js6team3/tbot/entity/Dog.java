@@ -30,7 +30,7 @@ public class Dog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OrderBy
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     /**
      * поле "nickname" - кличка
@@ -59,4 +59,13 @@ public class Dog {
     @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.TRUE)
     List<User> user;
+
+    public void setAge(int age) {
+        if (age < 0) {                 // Проверка на отрицательное число
+            age *= -1;                 // Инвентаризация числа
+        } else if (age > 30) {         // Проверка на максимальный возраст
+            age = 0;
+        }
+        this.age = age;
+    }
 }

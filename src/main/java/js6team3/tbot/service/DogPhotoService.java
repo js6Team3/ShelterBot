@@ -41,13 +41,13 @@ public class DogPhotoService {
     /**
      * "PhotoDogDir" - директория фото сущности Dog
      */
-    private String PhotoDogDir;
+    private String photoDogDir;
 
     /**
-     * <b>Метод загружает фото питомца в базу данных и на диск</b>
-     * <br> Используется метод репозитория {@link JpaRepository#findById(Object)}
-     * <br> Используется метод репозитория {@link JpaRepository#save(Object)}
-     * <br> Используется метод репозитория {@link DogPhotoService#getExtensions(String)}
+     * Метод загружает фото питомца в базу данных и на диск
+     * Используется метод репозитория {@link JpaRepository#findById(Object)}
+     * Используется метод репозитория {@link JpaRepository#save(Object)}
+     * Используется метод репозитория {@link DogPhotoService#getExtensions(String)}
      *
      * @param id   идентификатор питомца
      * @param file считываемый файл
@@ -61,7 +61,7 @@ public class DogPhotoService {
                 .getName();
         logger.info("Текущий метод - " + methodName);
         Dog dog = dogRepository.findById(id).orElseThrow();
-        Path filePath = Path.of(PhotoDogDir, id + "." + getExtensions(file.getOriginalFilename()));
+        Path filePath = Path.of(photoDogDir, id + "." + getExtensions(file.getOriginalFilename()));
         /** создаем директорию, если её нет */
         Files.createDirectories(filePath.getParent());
         /**
@@ -86,7 +86,7 @@ public class DogPhotoService {
     }
 
     /**
-     * <b> Метод формирует имя файла </b>
+     * Метод формирует имя файла
      *
      * @return Возвращает имя файла
      */
@@ -101,8 +101,8 @@ public class DogPhotoService {
     }
 
     /**
-     * <b>Метод ищет питомца по его id идентификатору</b>
-     * <br> Используется метод репозитория {@link JpaRepository#findById(Object)}
+     * Метод ищет питомца по его id идентификатору
+     * Используется метод репозитория {@link JpaRepository#findById(Object)}
      *
      * @param dogId идентификатор питомца
      * @return Возвращает найденного питомца
@@ -118,8 +118,8 @@ public class DogPhotoService {
     }
 
     /**
-     * <b>Метод ищет фото питомца по id идентификатору питомца</b>
-     * <br> Используется метод репозитория {@link JpaRepository#findById(Object)}
+     * Метод ищет фото питомца по id идентификатору питомца
+     * Используется метод репозитория {@link JpaRepository#findById(Object)}
      *
      * @param dogId идентификатор питомца
      * @return Возвращает объект фото

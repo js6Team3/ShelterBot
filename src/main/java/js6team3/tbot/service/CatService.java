@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Сервис для работы с сущностью "Cat"
@@ -23,27 +24,14 @@ public class CatService {
     private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
     private final CatRepository catRepository;
-    private final ValidationService validationService;
 
     /**
      * Получение полного списка экземпляров сущности "Cat"
      *
      * @return список экземпляров сущности "Cat"
      */
-    public Collection<Cat> getAllCats() {
+    public List<Cat> getAllCats() {
         return this.catRepository.findAll();
-    }
-
-    /**
-     * Метод возвращает из БД питомца по идентификатору id
-     *
-     * @param id идентификатор питомца в БД
-     * @return getCat
-     * @see CatRepository
-     */
-    public Cat getCatById(Long id) {
-        Cat getCat = catRepository.findById(id).orElse(null);
-        return getCat;
     }
 
     /**
@@ -60,8 +48,8 @@ public class CatService {
                 .getEnclosingMethod()
                 .getName();
         logger.info("Текущий метод - " + methodName);
-        if (!validationService.validate(cat)) {
-            throw new ValidationException(cat.toString());
+        if (cat.getNickname() == null || cat.getNickname().isBlank() || cat.getNickname().isEmpty()) {
+            throw new CatNullParameterValueException("Кличка питомца не указана");
         }
         return catRepository.save(cat);
     }
@@ -101,14 +89,15 @@ public class CatService {
                 .getName();
         logger.info("Текущий метод - " + methodName);
         Cat replaceCat = catRepository.findById(id).orElse(null);
-        if (!validationService.validate(replaceCat)) {
-            throw new ValidationException(cat.toString());
-        }
 
-        replaceCat.setNickname(cat.getNickname());
-        replaceCat.setBreed(cat.getBreed());
-        replaceCat.setAge(cat.getAge());
-        replaceCat.setDescription(cat.getDescription());
+        if (replaceCat != null) {
+            replaceCat.setNickname(cat.getNickname());
+            replaceCat.setBreed(cat.getBreed());
+            replaceCat.setAge(cat.getAge());
+            replaceCat.setDescription(cat.getDescription());
+        } else {
+            throw new CatNullParameterValueException("Недостаточно данных при попытке заменить данные у объекта Cat");
+        }
 
         return catRepository.save(replaceCat);
     }

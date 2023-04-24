@@ -38,13 +38,13 @@ public class CatPhotoService {
     /**
      * "PhotoCatDir" - директория фото сущности Cat
      */
-    private String PhotoCatDir;
+    private String photoCatDir;
 
     /**
-     * <b>Метод загружает фото питомца в базу данных и на диск</b>
-     * <br> Используется метод репозитория {@link JpaRepository#findById(Object)}
-     * <br> Используется метод репозитория {@link JpaRepository#save(Object)}
-     * <br> Используется метод репозитория {@link CatPhotoService#getExtensions(String)}
+     * Метод загружает фото питомца в базу данных и на диск
+     * Используется метод репозитория {@link JpaRepository#findById(Object)}
+     * Используется метод репозитория {@link JpaRepository#save(Object)}
+     * Используется метод репозитория {@link CatPhotoService#getExtensions(String)}
      *
      * @param id   идентификатор питомца
      * @param file считываемый файл
@@ -58,7 +58,7 @@ public class CatPhotoService {
                 .getName();
         logger.info("Текущий метод - " + methodName);
         Cat cat = catRepository.findById(id).orElseThrow();
-        Path filePath = Path.of(PhotoCatDir, id + "." + getExtensions(file.getOriginalFilename()));
+        Path filePath = Path.of(photoCatDir, id + "." + getExtensions(file.getOriginalFilename()));
         /** создаем директорию, если её нет */
         Files.createDirectories(filePath.getParent());
         /**
@@ -83,7 +83,7 @@ public class CatPhotoService {
     }
 
     /**
-     * <b> Метод формирует имя файла </b>
+     * Метод формирует имя файла
      *
      * @return Возвращает имя файла
      */
@@ -98,8 +98,8 @@ public class CatPhotoService {
     }
 
     /**
-     * <b>Метод ищет питомца по его id идентификатору</b>
-     * <br> Используется метод репозитория {@link JpaRepository#findById(Object)}
+     * Метод ищет питомца по его id идентификатору
+     * Используется метод репозитория {@link JpaRepository#findById(Object)}
      *
      * @param catId идентификатор питомца
      * @return Возвращает найденного питомца
@@ -115,8 +115,8 @@ public class CatPhotoService {
     }
 
     /**
-     * <b>Метод ищет фото питомца по id идентификатору питомца</b>
-     * <br> Используется метод репозитория {@link JpaRepository#findById(Object)}
+     * Метод ищет фото питомца по id идентификатору питомца
+     * Используется метод репозитория {@link JpaRepository#findById(Object)}
      *
      * @param catId идентификатор питомца
      * @return Возвращает объект фото

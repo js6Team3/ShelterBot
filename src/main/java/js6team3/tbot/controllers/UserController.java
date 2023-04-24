@@ -50,31 +50,6 @@ public class UserController {
     }
 
     /**
-     * чтение записи о пользователе
-     */
-    @Operation(
-            summary = "Чтение информации о пользователе по идентификатору",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "Чтение информации о пользователе завершено успешно",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = User.class))
-                    )),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = User.class))
-                            ))
-            })
-    @GetMapping("/get/{id}")
-    public User getUserById(@Parameter(description = "Id пользователя", example = "1") @PathVariable("id") Long id) {
-        return this.userService.getUserById(id);
-    }
-
-    /**
      * создание записи о новом пользователе
      */
     @Operation(

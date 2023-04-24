@@ -2,9 +2,9 @@ package js6team3.tbot.service;
 
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.Dog;
+import js6team3.tbot.exception.DogNullParameterValueException;
 import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.listener.TBotUpdatesListener;
-import js6team3.tbot.repository.CatRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Сервис для работы с сущностью "Dog"
@@ -25,27 +26,14 @@ public class DogService {
     private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
 
     private final DogRepository dogRepository;
-    private final ValidationService validationService;
 
     /**
      * Получение полного списка экземпляров сущности "Dog"
      *
      * @return список экземпляров сущности "Dog"
      */
-    public Collection<Dog> getAllDogs() {
+    public List<Dog> getAllDogs() {
         return this.dogRepository.findAll();
-    }
-
-    /**
-     * Метод возвращает из БД питомца по идентификатору id
-     *
-     * @param id идентификатор питомца в БД
-     * @return getDog
-     * @see DogRepository
-     */
-    public Dog getDogById(Long id) {
-        Dog getDog = dogRepository.findById(id).orElse(null);
-        return getDog;
     }
 
     /**
@@ -62,8 +50,8 @@ public class DogService {
                 .getEnclosingMethod()
                 .getName();
         logger.info("Текущий метод - " + methodName);
-        if (!validationService.validate(dog)) {
-            throw new ValidationException(dog.toString());
+        if (dog.getNickname() == null || dog.getNickname().isBlank() || dog.getNickname().isEmpty()) {
+            throw new DogNullParameterValueException("Кличка питомца не указана");
         }
         return dogRepository.save(dog);
     }
@@ -103,15 +91,14 @@ public class DogService {
                 .getName();
         logger.info("Текущий метод - " + methodName);
         Dog replaceDog = dogRepository.findById(id).orElse(null);
-        if (!validationService.validate(replaceDog)) {
-            throw new ValidationException(dog.toString());
+        if (replaceDog != null) {
+            replaceDog.setNickname(dog.getNickname());
+            replaceDog.setBreed(dog.getBreed());
+            replaceDog.setAge(dog.getAge());
+            replaceDog.setDescription(dog.getDescription());
+        } else {
+            throw new DogNullParameterValueException("Недостаточно данных при попытке заменить данные у объекта Dog");
         }
-
-        replaceDog.setNickname(dog.getNickname());
-        replaceDog.setBreed(dog.getBreed());
-        replaceDog.setAge(dog.getAge());
-        replaceDog.setDescription(dog.getDescription());
-
         return dogRepository.save(replaceDog);
     }
 }
