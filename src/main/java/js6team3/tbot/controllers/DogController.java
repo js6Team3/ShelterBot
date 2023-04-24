@@ -65,31 +65,6 @@ public class DogController {
     }
 
     /**
-     * чтение записи о питомце
-     */
-    @Operation(
-            summary = "Чтение информации о питомце по идентификатору",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "Чтение информации о питомце завершено успешно",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Dog.class))
-                    )),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Dog.class))
-                            ))
-            })
-    @GetMapping("/get/{id}")
-    public Dog getDogById(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id) {
-        return this.dogService.getDogById(id);
-    }
-
-    /**
      * изменение данных о питомце
      */
     @Operation(summary = "Изменение данных о питомце",

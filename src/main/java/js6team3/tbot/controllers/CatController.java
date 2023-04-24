@@ -66,31 +66,6 @@ public class CatController {
     }
 
     /**
-     * чтение записи о питомце
-     */
-    @Operation(
-            summary = "Чтение информации о питомце по идентификатору",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "Чтение информации о питомце завершено успешно",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Cat.class))
-                    )),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Не найден запрашиваемый ресурс",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Cat.class))
-                            ))
-            })
-    @GetMapping("/get/{id}")
-    public Cat getCatById(@Parameter(description = "Id питомца", example = "1") @PathVariable("id") Long id) {
-        return this.catService.getCatById(id);
-    }
-
-    /**
      * изменение данных о питомце
      */
     @Operation(summary = "Изменение данных о питомце",
