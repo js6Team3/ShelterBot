@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * The TBot configuration and connect
- *
- * @author Dmitry Bezin
  */
 @Configuration
 public class TBotConfiguration {

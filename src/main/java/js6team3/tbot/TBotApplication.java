@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author JS6_Team3
+ * Андрей Попов, Виктория Логинова, Александр Кривошеев, Юрий Калынбаев
  */
 @SpringBootApplication
 //@EnableScheduling
@@ -13,6 +14,5 @@ public class TBotApplication {
     public static void main(String[] args) {
         SpringApplication.run(TBotApplication.class, args);
         System.out.println("JavaSprint6_Team3 Проект");
-
     }
 }

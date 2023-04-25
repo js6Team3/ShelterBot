@@ -2,7 +2,7 @@ package js6team3.tbot.service;
 
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.CatPhoto;
-import js6team3.tbot.listener.TBotUpdatesListener;
+import js6team3.tbot.listener.TBotListener;
 import js6team3.tbot.repository.CatPhotoRepository;
 import js6team3.tbot.repository.CatRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static io.swagger.v3.core.util.AnnotationsUtils.getExtensions;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 /**
@@ -29,7 +28,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @RequiredArgsConstructor
 public class CatPhotoService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotListener.class);
 
     private final CatRepository catRepository;
     private final CatPhotoRepository catPhotoRepository;
@@ -69,7 +68,7 @@ public class CatPhotoService {
                 InputStream is = file.getInputStream();
                 OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
                 BufferedInputStream bis = new BufferedInputStream(is, 2048);
-                BufferedOutputStream bos = new BufferedOutputStream(os, 2048);
+                BufferedOutputStream bos = new BufferedOutputStream(os, 2048)
         ) {
             bis.transferTo(bos);
         }

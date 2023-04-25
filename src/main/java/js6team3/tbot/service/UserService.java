@@ -3,13 +3,13 @@ package js6team3.tbot.service;
 import js6team3.tbot.entity.User;
 import js6team3.tbot.exception.UsersNullParameterValueException;
 import js6team3.tbot.exception.ValidationException;
-import js6team3.tbot.listener.TBotUpdatesListener;
+import js6team3.tbot.listener.TBotListener;
 import js6team3.tbot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotListener.class);
     private final UserRepository userRepository;
 
     /**
@@ -90,7 +90,7 @@ public class UserService {
      *
      * @param id   идентификатор пользователя в БД
      * @param user экземпляр сущности "User"
-     * @throws ValidationException
+     * @throws ValidationException Calls methodValidationException(message) // @zalex14
      * @see UserRepository
      * @see User
      */

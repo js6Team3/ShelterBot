@@ -1,17 +1,15 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Cat;
 import js6team3.tbot.entity.Dog;
 import js6team3.tbot.exception.DogNullParameterValueException;
 import js6team3.tbot.exception.ValidationException;
-import js6team3.tbot.listener.TBotUpdatesListener;
+import js6team3.tbot.listener.TBotListener;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DogService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotListener.class);
 
     private final DogRepository dogRepository;
 
@@ -40,7 +38,7 @@ public class DogService {
      * Метод сохраняет в БД созданный объект питомца.
      *
      * @param dog экземпляр сущности "Dog"
-     * @throws ValidationException
+     * @throws ValidationException Calls methodValidationException(message) // @zalex14
      * @see DogRepository
      */
     public Dog createDogInDB(Dog dog) {
@@ -79,7 +77,7 @@ public class DogService {
      *
      * @param id  идентификатор питомца в БД
      * @param dog экземпляр сущности "Dog"
-     * @throws ValidationException
+     * @throws ValidationException Calls methodValidationException(message) // @zalex14
      * @see DogRepository
      * @see Dog
      */

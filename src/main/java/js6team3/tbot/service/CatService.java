@@ -1,15 +1,15 @@
 package js6team3.tbot.service;
 
 import js6team3.tbot.entity.Cat;
+import js6team3.tbot.exception.CatNullParameterValueException;
 import js6team3.tbot.exception.ValidationException;
-import js6team3.tbot.listener.TBotUpdatesListener;
+import js6team3.tbot.listener.TBotListener;
 import js6team3.tbot.repository.CatRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CatService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotListener.class);
 
     private final CatRepository catRepository;
 
@@ -38,7 +38,7 @@ public class CatService {
      * Метод сохраняет в БД созданный объект питомца.
      *
      * @param cat экземпляр сущности "Cat"
-     * @throws ValidationException
+     * @throws ValidationException  Calls methodValidationException(message) // @zalex14
      * @see CatRepository
      */
     public Cat createCatInDB(Cat cat) {
@@ -77,7 +77,7 @@ public class CatService {
      *
      * @param id  идентификатор питомца в БД
      * @param cat экземпляр сущности "Cat"
-     * @throws ValidationException
+     * @throws ValidationException  Calls methodValidationException(message) // @zalex14
      * @see CatRepository
      * @see Cat
      */

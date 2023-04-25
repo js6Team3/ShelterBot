@@ -1,12 +1,8 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Cat;
-import js6team3.tbot.entity.CatPhoto;
 import js6team3.tbot.entity.Dog;
 import js6team3.tbot.entity.DogPhoto;
-import js6team3.tbot.listener.TBotUpdatesListener;
-import js6team3.tbot.repository.CatPhotoRepository;
-import js6team3.tbot.repository.CatRepository;
+import js6team3.tbot.listener.TBotListener;
 import js6team3.tbot.repository.DogPhotoRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +28,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @RequiredArgsConstructor
 public class DogPhotoService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TBotListener.class);
 
     private final DogRepository dogRepository;
     private final DogPhotoRepository dogPhotoRepository;
@@ -72,7 +68,7 @@ public class DogPhotoService {
                 InputStream is = file.getInputStream();
                 OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
                 BufferedInputStream bis = new BufferedInputStream(is, 2048);
-                BufferedOutputStream bos = new BufferedOutputStream(os, 2048);
+                BufferedOutputStream bos = new BufferedOutputStream(os, 2048)
         ) {
             bis.transferTo(bos);
         }

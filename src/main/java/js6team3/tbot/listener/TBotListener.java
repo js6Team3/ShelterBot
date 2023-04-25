@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
-import js6team3.tbot.constant.TBot;
+import js6team3.tbot.constant.TBotConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,16 +15,17 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
+ * The Telegram bot update
  *
- * @author Andrei Popov
+ * @author zalex14
  */
 @Component
-public class TBotUpdatesListener implements UpdatesListener {
-    private final Logger logger = LoggerFactory.getLogger(TBotUpdatesListener.class);
+public class TBotListener implements UpdatesListener {
+    private final Logger logger = LoggerFactory.getLogger(TBotListener.class);
 
     private final TelegramBot telegramBot;
 
-    public TBotUpdatesListener(TelegramBot telegramBot) {
+    public TBotListener(TelegramBot telegramBot) {
         this.telegramBot = telegramBot;
     }
 
@@ -45,14 +46,14 @@ public class TBotUpdatesListener implements UpdatesListener {
                 String text = message.text();
                 if ("/start".equals(text)) {
                     SendMessage sendMessage = new SendMessage(chatId,
-                            TBot.GREETING +
-                            "\n [Ваш chatId: " + chatId + " usrId: " + usrId + "]");
+                            TBotConstant.GREETING +
+                                    "\n [Ваш chatId: " + chatId + " usrId: " + usrId + "]");
                     SendResponse sendResponse = telegramBot.execute(sendMessage);
 
-                    sendMessage = new SendMessage(chatId, TBot.SELECT_MENU);
+                    sendMessage = new SendMessage(chatId, TBotConstant.SELECT_MENU);
                     sendResponse = telegramBot.execute(sendMessage);
 
-                    if(!sendResponse.isOk()) {
+                    if (!sendResponse.isOk()) {
                         logger.error("Error: {}", sendResponse.description());
                     }
                 }

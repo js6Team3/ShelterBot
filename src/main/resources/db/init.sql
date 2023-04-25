@@ -1,11 +1,11 @@
 --handset zalex14:1
 -- Таблица информации о приютах собок и кошек
 INSERT INTO shelter
-(id, information, address, phone, driving_link, working_hours, territory_admission, territory_staying,
+(id, name, information, address, phone, driving_link, working_hours, territory_admission, territory_staying,
  security_contacts,
  animal_acquaintance, document_list, travel_recommendation, child_arranging, adult_arranging, sick_arrangement,
  handler_advice, refusal_reason)
-VALUES (1, 'Лучший приют для собак и щенков', 'улица Кунаева, 62, Алматы', '8 771 388-8111',
+VALUES (1, 'Первый собачий', 'Лучший приют для собак и щенков', 'улица Кунаева, 62, Алматы', '8 771 388-8111',
         'https://yandex.ru/maps/162/almaty/house/Y08YfwNpT0AGQFppfX53c3pmYA==/?ll=76.949651%2C43.262654&z=16',
         'Ежедневно 10:00–18:00', 'правила пропуска на территорию', 'правила нахождения в приюте', '8 771 388-3121',
         'правила общения с собаками', 'список документов для усыновления',
@@ -57,9 +57,9 @@ VALUES (1, 'Гулназ', '', 3, 'особенности кошки'),
 --handset zalex14:6
 -- Таблица отчетов усыновителей
 INSERT INTO report
-(id, report_time, adopter_id, animal_id, photo_id, diet, health, behavior)
-VALUES (1, current_timestamp, 1, 1, 1, 'Рацион животного', 'Общее самочувствие животного', 'Изменения в поведении'),
-       (2, current_timestamp, 2, 2, 2, 'Поедание комнатных растений', 'отличное', 'Изменения в поведении'),
-       (3, current_timestamp, 3, 3, 3, 'Кит-и-кэт', 'Кошка просится погулять на улицу',
+(id, local_date_time, chat_id, telegram_file_id, info, diet, health, behavior)
+VALUES (1, current_timestamp, 1, 1, '', 'Рацион животного', 'Общее самочувствие животного', 'Изменения в поведении'),
+       (2, current_timestamp, 2, 2, '', 'Поедание комнатных растений', 'отличное', 'Изменения в поведении'),
+       (3, current_timestamp, 3, 3, '', 'Кит-и-кэт', 'Кошка просится погулять на улицу',
         'кошка перестает ходить на лоток'),
-       (4, '2023-04-14 11:45:41', 4, 4, 4, 'Натуральное', 'Кот ведёт себя беспокойно', 'кот отказывается от пищи');
+       (4, '2023-04-14 11:45:41', 4, 4, '', 'Натуральное', 'Кот ведёт себя беспокойно', 'кот отказывается от пищи');

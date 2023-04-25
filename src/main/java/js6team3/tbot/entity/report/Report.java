@@ -1,8 +1,6 @@
 package js6team3.tbot.entity.report;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,52 +12,71 @@ import java.time.LocalDateTime;
  * animal change in behavior
  * actual animal photo
  *
- * @author Andrei Popov
- *
- * Ежедневный отчет усыновителя о содержании животного
- * В ежедневный отчет входит следующая информация:
- * Рацион животного
- * Общее самочувствие и привыкание к новому месту
- * Изменение в поведении: отказ от старых привычек, приобретение новых
- * Фото животного
+ * @author zalex14
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "report")
 public class Report {
-    //    Report number (номер отчета)
+    /**
+     * The report's id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    //    reporting date & time (Дата и время предоставления отчета)
-    @Column(name = "report_time")
-    private LocalDateTime dayTime;
+    /**
+     * The report's date & time
+     */
+    private LocalDateTime localDateTime;
 
-    //  adopter number (id усыновителя)
-    @Column(name = "adopter_id")
-    private Long adopterId;
+    /**
+     * pet's info (pet's name, adopter)
+     */
+    private String info;
 
-    //  animal number (id животного)
-    @Column(name = "animal_id")
-    private Long animalId;
-
-    // animal daily diet (Рацион животного)
-    @Column(name = "diet")
+    /**
+     * pet's daily diet
+     */
     private String diet;
 
-    // general health of animal (Общее самочувствие и привыкание к новому месту)
-    @Column(name = "health")
+    /**
+     * general pet's health
+     */
     private String health;
 
-    // change of animal's behavior (Изменение в поведении: отказ от старых привычек, приобретение новых)
-    @Column(name = "behavior")
+    /**
+     * change of animal's behavior
+     */
     private String behavior;
 
-    // id daily photo link (Ежедневный отчет подтверждается ежедневным фото животного)
-    @OneToOne
-    private Photo photo;
+    /**
+     * The telegram chat's id
+     */
+    private Long chatId;
+    /**
+     * The telegram chat's file id
+     */
+    private String telegramFileId;
+
+
+    /**
+     * The daily pet's photo
+     */
+    private byte[] photoFile;
+
+    public Report(Long id, LocalDateTime localDateTime, String info, String diet, String health, String behavior,
+                  Long chatId, String telegramFileId, byte[] photoFile) {
+        this.id = id;
+        this.localDateTime = LocalDateTime.now();
+        this.info = info;
+        this.diet = diet;
+        this.health = health;
+        this.behavior = behavior;
+        this.chatId = chatId;
+        this.telegramFileId = telegramFileId;
+        this.photoFile = photoFile;
+    }
 }

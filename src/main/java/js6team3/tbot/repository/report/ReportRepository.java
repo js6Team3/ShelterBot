@@ -1,15 +1,12 @@
-package js6team3.tbot.repository;
+package js6team3.tbot.repository.report;
 
 import js6team3.tbot.entity.report.Report;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 /**
- * Implement report access layer
+ * Implement report access layer for daily reports
  *
- * @author Andrei Popov
+ * @author zalex14
  */
 public interface ReportRepository extends JpaRepository<Report, Long> {
-    List<Report> getAll();
 }

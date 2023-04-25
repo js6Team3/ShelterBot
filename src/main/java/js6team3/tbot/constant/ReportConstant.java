@@ -2,17 +2,18 @@ package js6team3.tbot.constant;
 
 /**
  * Standard messages at adaptation stage
- *
- * @author Andrei Popov
- * (Типовые ответы бота усыновителю на этапе адаптации)
  */
-public class Report {
-    // result of an animal adaptation (Решение по результатам адаптации животного у усыновителя)
+public class ReportConstant {
+    /**
+     * result of an animal adaptation
+     */
     public enum AdoptionsResult {
         SUCCESS, EXTENSION_14, EXTENSION_30, FAIL
     }
 
-    // standard rules for report (Правила отчетности усыновителя животного)
+    /**
+     * standard rules for report
+     */
     public static final String WELCOME = "Уважаемый усыновитель, после того как Вы забрали животное" +
             " из приюта, Вы обязаны в течение месяца присылать информацию о том, как животное чувствует себя на новом" +
             " месте. Отчет нужно присылать каждый день, ограничений в сутках по времени сдачи отчета нет." +
@@ -21,12 +22,16 @@ public class Report {
             " Фото животного, Рацион животного, Общее самочувствие и привыкание к новому месту," +
             " Изменение в поведении: отказ от старых привычек, приобретение новых";
 
-    // a report does not meet the requirements (Отчет не соответствует требованиям)
+    /**
+     * a report does not meet the requirements
+     */
     public static final String IMPROPERLY_FILLING = "Дорогой усыновитель, мы заметили, что ты заполняешь отчет" +
             " не так подробно, как необходимо. Пожалйста, подойди ответственнее к этому занятию." +
             " В противном случае, волонтеры приюта будут обязаны лично проверить условия содержания животного.";
 
-    // report does not received (Отчет не получен)
+    /**
+     * report does not receive
+     */
     public static final String REQUEST_NOTE = "Уважаемый усыновитель, мы ждем от вас ежедневный отчет о питомце," +
             " содержащий информацию о рационе животного, общим самочувствии и првыкании к новому месту, изменениях" +
             " в поведении животного и его фото. Отчет нужно присылать каждый день до 21.00.";
