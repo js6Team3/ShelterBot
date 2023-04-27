@@ -1,8 +1,9 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Cat;
+import js6team3.tbot.entity.pet.Cat;
 import js6team3.tbot.exception.CatNullParameterValueException;
-import js6team3.tbot.repository.CatRepository;
+import js6team3.tbot.repository.pet.CatRepository;
+import js6team3.tbot.service.pet.CatService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

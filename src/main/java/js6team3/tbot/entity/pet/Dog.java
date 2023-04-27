@@ -1,22 +1,21 @@
-package js6team3.tbot.entity;
+package js6team3.tbot.entity.pet;
 
+import js6team3.tbot.entity.User;
 import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 /**
- * Сущность: Dog
+ * Entity: Dog
  *
  * @author Юрий Калынбаев
+ * @author zalex14
+ * @version 2.0
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,7 +23,7 @@ import java.util.List;
 public class Dog {
 
     /**
-     * поле "id" - идентификатор экземпляра класса
+     * The dog id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,29 +32,31 @@ public class Dog {
     private Long id;
 
     /**
-     * поле "nickname" - кличка
+     * The dog nickname
      */
     @Column(name = "nick_name")
     private String nickname;
 
     /**
-     * поле "breed" - порода
+     * The dog's breed (порода)
      */
     @Column(name = "breed")
     private String breed;
 
     /**
-     * поле "age" - возраст
+     * The dog's age
      */
     @Column(name = "age")
     private int age;
 
     /**
-     * поле "description" - описание
+     * The dog's feature and info
      */
     @Column(name = "description")
     private String description;
-
+    /**
+     * A link to the dog's user
+     */
     @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.TRUE)
     List<User> user;

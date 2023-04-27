@@ -20,12 +20,15 @@ import java.util.Collection;
  * a REST controller for handle HTTP requests for the handler's information
  *
  * @author zalex14
+ * @version 1.0
  */
 @RestController
 @RequestMapping("/api/handler")
 @Tag(name = "Информация о рекомендованных кинологах", description = "CRUD-операции с кинолагами собак")
 @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "ОК. Данные кинолога успешно загружены/получены/обновлены"),
+        @ApiResponse(responseCode = "200", description = "ОК. Данные успешно обработаны",
+                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        array = @ArraySchema(schema = @Schema(implementation = Handler.class)))),
         @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры запроса некорректны"),
         @ApiResponse(responseCode = "404", description = "Ошибка 404. Неправильный id. Результат запроса равен NULL"),
         @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка программы")
@@ -43,11 +46,7 @@ public class HandlerController {
      * @param handler obj
      * @return create of the handler
      */
-    @Operation(summary = "Добавить нового кинолога",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК. Кинолог добавлен",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Handler.class))))}, tags = "Handler")
+    @Operation(summary = "Добавить нового кинолога", description = "ОК. Кинолог добавлен")
     @PostMapping
     public Handler addHandler(@RequestBody Handler handler) {
         return this.handlerService.add(handler);
@@ -58,9 +57,7 @@ public class HandlerController {
      *
      * @param id The handler's id
      */
-    @Operation(summary = "Удаление кинолога по id",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК.Кинолог удален",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "Handler")
+    @Operation(summary = "Удаление кинолога по id", description = "ОК.Кинолог удален")
     @DeleteMapping("/{id}")
     public void delete(@Parameter(description = "id кинолога") @PathVariable("id") Long id) {
         handlerService.delete(id);
@@ -73,10 +70,7 @@ public class HandlerController {
      * @param handler The handler obj
      * @return The handler obj
      */
-    @Operation(summary = "Редактировать информацию о кинологе",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК. Информация обновлена",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Handler.class))))}, tags = "Handler")
+    @Operation(summary = "Редактировать информацию о кинологе", description = "ОК. Информация обновлена")
     @PutMapping("/{id}")
     public Handler updateHandler(@Parameter(description = "id кинолога", example = "1") @PathVariable("id") Long id,
                                  @RequestBody Handler handler) {
@@ -89,10 +83,7 @@ public class HandlerController {
      * @return a list of handlers
      */
     @Operation(
-            summary = "Вывести списк всех кинологов",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК. Получен список кинологов",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Handler.class))))}, tags = "Handler")
+            summary = "Вывести списк всех кинологов", description = "ОК. Получен список кинологов")
     @GetMapping("/all")
     public Collection<Handler> getAllHandlers() {
         return this.handlerService.getAllHandlers();
@@ -104,9 +95,7 @@ public class HandlerController {
      * @param id The handler's id
      * @return The handler obj
      */
-    @Operation(summary = "Получить информацию о кинологе по id",
-            responses = {@ApiResponse(responseCode = "200", description = "Ок. Информация о кинологе получена",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "Handler")
+    @Operation(summary = "Получить информацию о кинологе по id", description = "Ок. Информация о кинологе получена")
     @GetMapping("/get/{id}")
     public Handler getHandler(@Parameter(description = "id кинолога", example = "1") @PathVariable("id") Long id) {
         return this.handlerService.getHandler(id);

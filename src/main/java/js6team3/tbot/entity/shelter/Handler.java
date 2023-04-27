@@ -5,9 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
+ * Entity: Handlers for a dog and putty
  * The recommended handlers listing
  *
  * @author zalex14
+ * @version 1.0
  */
 @Data
 @Entity

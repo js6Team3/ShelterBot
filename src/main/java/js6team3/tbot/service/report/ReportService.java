@@ -12,15 +12,15 @@ import java.util.Optional;
 import js6team3.tbot.exception.NullValueException;
 
 /**
+ * Service Report
  * Service for managing daily adopter's report
  *
  * @author zalex14
+ * @version 1.0
  */
 @Service
 @Data
-
-
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ReportService {
 
 //    private final Logger logger = LoggerFactory.getLogger(TBotListener.class);

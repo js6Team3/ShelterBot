@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
+ * Entity: Report
  * The adopter daily report of the animal content, incl.
  * animal diet
  * animal well-being and health at new environment
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * actual animal photo
  *
  * @author zalex14
+ * @version 1.0
  */
 @Data
 @NoArgsConstructor

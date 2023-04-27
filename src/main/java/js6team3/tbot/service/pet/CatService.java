@@ -1,10 +1,10 @@
-package js6team3.tbot.service;
+package js6team3.tbot.service.pet;
 
-import js6team3.tbot.entity.Cat;
-import js6team3.tbot.exception.CatNullParameterValueException;
+import js6team3.tbot.entity.pet.Cat;
+import js6team3.tbot.exception.NullValueException;
 import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.telegram.TBotListener;
-import js6team3.tbot.repository.CatRepository;
+import js6team3.tbot.repository.pet.CatRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Сервис для работы с сущностью "Cat"
+ * Service Cat
  *
  * @author Юрий Калынбаев
+ * @author zalex14
+ * @version 2.0
  */
 @Service
 @RequiredArgsConstructor
@@ -49,7 +51,7 @@ public class CatService {
                 .getName();
         logger.info("Текущий метод - " + methodName);
         if (cat.getNickname() == null || cat.getNickname().isBlank() || cat.getNickname().isEmpty()) {
-            throw new CatNullParameterValueException("Кличка питомца не указана");
+            throw new NullValueException("Кличка питомца не указана");
         }
         return catRepository.save(cat);
     }
@@ -96,7 +98,7 @@ public class CatService {
             replaceCat.setAge(cat.getAge());
             replaceCat.setDescription(cat.getDescription());
         } else {
-            throw new CatNullParameterValueException("Недостаточно данных при попытке заменить данные у объекта Cat");
+            throw new NullValueException("Недостаточно данных при попытке заменить данные у объекта Cat");
         }
 
         return catRepository.save(replaceCat);

@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
+ * Service Handler
  * Service for managing the recommended handlers for dogs
  *
  * @author zalex14
+ * @version 1.0
  */
 @Service
 public class HandlerService {

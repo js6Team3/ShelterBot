@@ -1,7 +1,10 @@
-package js6team3.tbot.telegram.constant;
+package js6team3.tbot.constant;
 
 /**
+ * The shelter information for the bot
  *
+ * @author zalex14
+ * @version 1.0
  */
 public class InfoConstant {
     /**

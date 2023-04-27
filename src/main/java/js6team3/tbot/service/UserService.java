@@ -1,7 +1,7 @@
 package js6team3.tbot.service;
 
 import js6team3.tbot.entity.User;
-import js6team3.tbot.exception.UsersNullParameterValueException;
+import js6team3.tbot.exception.NullValueException;
 import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.telegram.TBotListener;
 import js6team3.tbot.repository.UserRepository;
@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Сервис для работы с сущностью "User"
+ * Service User
  *
  * @author Юрий Калынбаев
+ * @version 1.0
  */
 @Service
 @RequiredArgsConstructor
@@ -50,19 +51,19 @@ public class UserService {
         logger.info("Текущий метод - " + methodName);
         String userNewNumber = user.getUserPhoneNumber();
         if (user.getFirstName() == null || user.getFirstName().isBlank() || user.getFirstName().isBlank()) {
-            throw new UsersNullParameterValueException("Имя пользователя не указано");
+            throw new NullValueException("Имя пользователя не указано");
         }
         if (user.getLastName() == null || user.getLastName().isBlank() || user.getLastName().isBlank()) {
-            throw new UsersNullParameterValueException("Фамилия пользователя не указана");
+            throw new NullValueException("Фамилия пользователя не указана");
         }
         // Форматирование телефона пользователя, если телефон указан неверно получаем null
         if (userNewNumber != null && MatchingPhoneNumber(userNewNumber) != null) {
             user.setUserPhoneNumber(MatchingPhoneNumber(userNewNumber));
         } else {
-            throw new UsersNullParameterValueException("Телефон пользователя не указан или не соответствует формату");
+            throw new NullValueException("Телефон пользователя не указан или не соответствует формату");
         }
         if (!ValidityEmail(user.getUserEmail())) {
-            throw new UsersNullParameterValueException("Почта пользователя не указана или не соответствует формату");
+            throw new NullValueException("Почта пользователя не указана или не соответствует формату");
         }
         return userRepository.save(user);
     }
@@ -108,7 +109,7 @@ public class UserService {
             replaceUser.setUserPhoneNumber(user.getUserPhoneNumber());
             replaceUser.setUserEmail(user.getUserEmail());
         } else {
-            throw new UsersNullParameterValueException("Недостаточно данных при попытке" +
+            throw new NullValueException("Недостаточно данных при попытке" +
                     " заменить данные у объекта users");
         }
         return userRepository.save(replaceUser);

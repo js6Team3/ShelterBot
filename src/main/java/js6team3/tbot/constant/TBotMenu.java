@@ -1,7 +1,10 @@
-package js6team3.tbot.telegram.constant;
+package js6team3.tbot.constant;
 
 /**
  * The Bot menu
+ *
+ * @author zalex14
+ * @version 1.0
  */
 public class TBotMenu {
     /**
@@ -57,7 +60,7 @@ public class TBotMenu {
      */
     public static final String DOG_INFO = """
             Получить подробную информацию о приюте:\s
-            1 - правила первого знакомства с ссобакой 
+            1 - правила первого знакомства с ссобакой
             2 - Список необходимых документов для усыновления
             3 - Советы кинолога
             4 - Рекомендованные кинологи

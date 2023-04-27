@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
+ * Service Shelter
  * Service for managing the shelter information
  *
  * @author zalex14
+ * @version 1.0
  */
 @Service
 public class ShelterService {

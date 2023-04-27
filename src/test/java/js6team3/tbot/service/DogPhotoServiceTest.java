@@ -1,9 +1,10 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Dog;
-import js6team3.tbot.entity.DogPhoto;
-import js6team3.tbot.repository.DogPhotoRepository;
-import js6team3.tbot.repository.DogRepository;
+import js6team3.tbot.entity.pet.Dog;
+import js6team3.tbot.entity.pet.DogPhoto;
+import js6team3.tbot.repository.pet.DogPhotoRepository;
+import js6team3.tbot.repository.pet.DogRepository;
+import js6team3.tbot.service.pet.DogPhotoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;

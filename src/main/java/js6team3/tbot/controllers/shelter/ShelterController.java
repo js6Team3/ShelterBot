@@ -20,12 +20,15 @@ import java.util.Collection;
  * a REST controller for handle HTTP requests for the shelter's information
  *
  * @author zalex14
+ * @version 1.0
  */
 @RestController
 @RequestMapping("/api/shelter")
 @Tag(name = "Изменить информацию о приюте", description = "CRUD-операции с приютами")
 @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "ОК. Информация приюта успешно загружена/получена/обновлена"),
+        @ApiResponse(responseCode = "200", description = "ОК. Данные успешно обработаны",
+                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                        array = @ArraySchema(schema = @Schema(implementation = Shelter.class)))),
         @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры запроса некорректны"),
         @ApiResponse(responseCode = "404", description = "Ошибка 404. Неправильный id. Результат запроса равен NULL"),
         @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка программы")
@@ -43,11 +46,7 @@ public class ShelterController {
      * @param shelter obj
      * @return create of the shelter
      */
-    @Operation(summary = "Добавить новый приют",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК. Приют добавлен",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Shelter.class))))}, tags = "SHELTER")
+    @Operation(summary = "Добавить новый приют")
     @PostMapping
     public Shelter addShelter(@RequestBody Shelter shelter) {
         return this.shelterService.addShelter(shelter);
@@ -58,9 +57,7 @@ public class ShelterController {
      *
      * @param id The shelter's id
      */
-    @Operation(summary = "Удаление приюта по id",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК.Приют удален",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "SHELTER")
+    @Operation(summary = "Удаление приюта по id")
     @DeleteMapping("/{id}")
     public void deleteShelter(@Parameter(description = "id приюта") @PathVariable("id") Long id) {
         shelterService.deleteShelter(id);
@@ -73,10 +70,7 @@ public class ShelterController {
      * @param shelter The shelter obj
      * @return The shelter obj
      */
-    @Operation(summary = "Редактировать информацию о приюте",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК. Информация обновлена",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Shelter.class))))}, tags = "SHELTER")
+    @Operation(summary = "Редактировать информацию о приюте")
     @PutMapping("/{id}")
     public Shelter updateShelter(@Parameter(description = "Приют id")
                                  @PathVariable("id") Long id, @RequestBody Shelter shelter) {
@@ -88,11 +82,7 @@ public class ShelterController {
      *
      * @return a list of shelters
      */
-    @Operation(
-            summary = "Вывести списк всех приютов",
-            responses = {@ApiResponse(responseCode = "200", description = "ОК. Получен список приютов",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Shelter.class))))}, tags = "SHELTER")
+    @Operation(summary = "Вывести списк всех приютов", description = "ОК. Получен список приютов")
     @GetMapping("/all")
     public Collection<Shelter> getAllShelters() {
         return this.shelterService.getAllShelters();
@@ -104,9 +94,7 @@ public class ShelterController {
      * @param id The shelter's id
      * @return The shelter obj
      */
-    @Operation(summary = "Получить информацию о приюте по id",
-            responses = {@ApiResponse(responseCode = "200", description = "Ок. Информация о приюте получена",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "SHELTER")
+    @Operation(summary = "Получить информацию о приюте по id", description = "Ок. Информация о приюте получена")
     @GetMapping("/get/{id}")
     public Shelter getShelter(@Parameter(description = "id приюта") @PathVariable("id") Long id) {
         return this.shelterService.getShelter(id);

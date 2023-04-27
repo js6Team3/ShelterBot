@@ -5,9 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
+ * Entity: Shelter
  * The shelter general description
  *
  * @author zalex14
+ * @version 1.0
  */
 @Data
 @Entity
