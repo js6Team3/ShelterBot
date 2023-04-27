@@ -1,14 +1,9 @@
 package js6team3.tbot.service.report;
 
-import com.pengrad.telegrambot.TelegramBot;
-import js6team3.tbot.listener.TBotListener;
-
 import js6team3.tbot.entity.report.Report;
 import js6team3.tbot.repository.report.ReportRepository;
 import lombok.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +18,13 @@ import js6team3.tbot.exception.NullValueException;
  */
 @Service
 @Data
+
+
 @RequiredArgsConstructor
 public class ReportService {
 
-    private final Logger logger = LoggerFactory.getLogger(TBotListener.class);
-    private TelegramBot telegramBot;
+//    private final Logger logger = LoggerFactory.getLogger(TBotListener.class);
+//    private TelegramBot telegramBot;
 
     private ReportRepository reportRepository;
 
@@ -74,12 +71,10 @@ public class ReportService {
      * Remove the report by id
      *
      * @param id the daily report's id
-     * @return The report obj
      */
-    public Report deleteReport(Long id) {
+    public void deleteReport(Long id) {
         Report report = searchReport(id);
         reportRepository.delete(report);
-        return report;
     }
 
     /**

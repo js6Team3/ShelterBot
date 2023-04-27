@@ -68,7 +68,7 @@ public class Report {
     private byte[] photoFile;
 
     public Report(Long id, LocalDateTime localDateTime, String info, String diet, String health, String behavior,
-                  Long chatId, String telegramFileId, byte[] photoFile) {
+                  Long chatId, String telegramFileId) {
         this.id = id;
         this.localDateTime = LocalDateTime.now();
         this.info = info;
@@ -77,6 +77,5 @@ public class Report {
         this.behavior = behavior;
         this.chatId = chatId;
         this.telegramFileId = telegramFileId;
-        this.photoFile = photoFile;
     }
 }

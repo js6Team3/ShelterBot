@@ -2,10 +2,13 @@ package js6team3.tbot.service.shelter;
 
 import js6team3.tbot.entity.shelter.Shelter;
 import js6team3.tbot.exception.NullValueException;
-import js6team3.tbot.listener.TBotListener;
+import js6team3.tbot.telegram.listener.TBotListener;
 import js6team3.tbot.repository.shelter.ShelterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -29,6 +32,8 @@ public class ShelterService {
      * Add new shelter
      *
      * @param shelter obj
+     * @return new shelter
+     * @throws NullValueException if the shelter's id isn't exist
      */
     public Shelter addShelter(Shelter shelter) {
         String methodName = new Object() {
@@ -45,29 +50,25 @@ public class ShelterService {
     }
 
     /**
-     * Remove the shelter
+     * Delete the shelter
      *
      * @param id The shelter id
      */
-    public Shelter deleteShelter(Long id) {
-        String methodName = new Object() {
-        }
-                .getClass()
-                .getEnclosingMethod()
-                .getName();
-        logger.info("Current Method is - " + methodName);
-        Shelter deleteShelter = shelterRepository.findById(id).orElse(null);
+    @CacheEvict("shelter")
+    public void deleteShelter(Long id) {
         shelterRepository.deleteById(id);
-        return deleteShelter;
     }
 
     /**
-     * Update the shelter data
+     * Edit the shelter data
      *
      * @param id      the shelter id
      * @param shelter obj
+     * @return the edited shelter
+     * @throws NullValueException if the shelter's id isn't exist
      */
-    public Shelter updateShelter(Long id, Shelter shelter) {
+    @CachePut(value = "shelter", key ="#shelter.id")
+    public Shelter editShelter(Long id, Shelter shelter) {
         String methodName = new Object() {
         }
                 .getClass()
@@ -75,15 +76,15 @@ public class ShelterService {
                 .getName();
         logger.info("Current Method is - " + methodName);
 
-        Shelter updateShelter = shelterRepository.findById(id).orElse(null);
-        if (updateShelter != null) {
-            updateShelter.setName(shelter.getName());
-            updateShelter.setInformation(shelter.getInformation());
+        Shelter editShelter = shelterRepository.findById(id).orElseThrow(null);
+        if (editShelter != null) {
+            editShelter.setName(shelter.getName());
+            editShelter.setInformation(shelter.getInformation());
 
         } else {
             throw new NullValueException("Недостаточно данных для обновления информации о приюте");
         }
-        return shelterRepository.save(updateShelter);
+        return shelterRepository.save(editShelter);
 
     }
 
@@ -97,7 +98,8 @@ public class ShelterService {
     /**
      * The shelter's info
      */
+    @Cacheable("shelter")
     public Shelter getShelter(Long id) {
-        return shelterRepository.findById(id).orElse(null);
+        return shelterRepository.findById(id).orElseThrow(null);
     }
 }

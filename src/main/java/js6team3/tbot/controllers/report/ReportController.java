@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import js6team3.tbot.entity.report.Report;
-import js6team3.tbot.entity.shelter.Shelter;
 import js6team3.tbot.service.report.ReportService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +26,12 @@ import java.util.Collection;
 @RequestMapping("/api/report")
 @Tag(name = "Операции с ежедневными отчетами усыновителей", description = "CRUD: Сохранение, удаление, " +
         "редактирование, получение отчетов")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "ОК. Отчет успешно загружен/получен/обновлен"),
+        @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры некорректны"),
+        @ApiResponse(responseCode = "404", description = "Ошибка 404. Неправильный id. Результат запроса равен NULL"),
+        @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка программы")
+})
 public class ReportController {
     ReportService reportService;
 
@@ -40,9 +46,6 @@ public class ReportController {
      */
     @PostMapping
     @Operation(summary = "Загрузка ежедневного отчета усыновителя")
-    @ApiResponse(responseCode = "200", description = "Отчет успешно загружен")
-    @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры некорректны")
-    @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка")
     public ResponseEntity<Report> createReport(@RequestBody Report report) {
         return ResponseEntity.ok().body(reportService.addReport(report));
     }
@@ -54,9 +57,6 @@ public class ReportController {
      */
     @GetMapping("/get/{id}")
     @Operation(summary = "Получение отчетов усыновителей за день")
-    @ApiResponse(responseCode = "200", description = "Отчеты успешно получены")
-    @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры некорректны")
-    @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка")
     public Report getReport(@Parameter(description = "id отчета", example = "1") @PathVariable("id") Long id) {
         return this.reportService.searchReport(id);
     }
@@ -66,11 +66,10 @@ public class ReportController {
      *
      * @return a list of reports
      */
-    @Operation(
-            summary = "Вывести все отчеты",
+    @Operation(summary = "Вывести все отчеты",
             responses = {@ApiResponse(responseCode = "200", description = "ОК. Получены отчеты новых хозяев",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Shelter.class))))}, tags = "SHELTER")
+                            array = @ArraySchema(schema = @Schema(implementation = Report.class))))}, tags = "Report")
     @GetMapping("/all")
     public Collection<Report> allReports() {
         return this.reportService.allDailyReports();
@@ -86,7 +85,7 @@ public class ReportController {
     @Operation(summary = "Редактировать ежедневный отчет",
             responses = {@ApiResponse(responseCode = "200", description = "ОК. Информация обновлена",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = Shelter.class))))}, tags = "SHELTER")
+                            array = @ArraySchema(schema = @Schema(implementation = Report.class))))}, tags = "Report")
     @PutMapping("/{id}")
     public Report updateReport(@Parameter(description = "Отчет id", example = "1") @PathVariable("id") Long id,
                                @io.swagger.v3.oas.annotations.parameters.RequestBody Report report) {
@@ -97,13 +96,12 @@ public class ReportController {
      * The report remove
      *
      * @param id The report id
-     * @return Delete the report
      */
     @Operation(summary = "Удаление отчета усыновителя по id",
             responses = {@ApiResponse(responseCode = "200", description = "ОК.Отчет удален",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "SHELTER")
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "Report")
     @DeleteMapping("/{id}")
-    public Report deleteReport(@Parameter(description = "id отчета", example = "1") @PathVariable("id") Long id) {
-        return this.reportService.deleteReport(id);
+    public void deleteReport(@Parameter(description = "id отчета") @PathVariable("id") Long id) {
+        reportService.deleteReport(id);
     }
 }

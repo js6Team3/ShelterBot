@@ -1,4 +1,4 @@
-package js6team3.tbot.constant;
+package js6team3.tbot.telegram.constant;
 
 /**
  * The Bot menu

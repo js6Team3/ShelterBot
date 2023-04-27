@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import js6team3.tbot.entity.shelter.Shelter;
 import js6team3.tbot.service.shelter.ShelterService;
@@ -23,6 +24,12 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/shelter")
 @Tag(name = "Изменить информацию о приюте", description = "CRUD-операции с приютами")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "ОК. Информация приюта успешно загружена/получена/обновлена"),
+        @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры запроса некорректны"),
+        @ApiResponse(responseCode = "404", description = "Ошибка 404. Неправильный id. Результат запроса равен NULL"),
+        @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка программы")
+})
 public class ShelterController {
     private final ShelterService shelterService;
 
@@ -50,14 +57,13 @@ public class ShelterController {
      * The shelter's remove
      *
      * @param id The shelter's id
-     * @return Delete the shelter
      */
     @Operation(summary = "Удаление приюта по id",
             responses = {@ApiResponse(responseCode = "200", description = "ОК.Приют удален",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "SHELTER")
     @DeleteMapping("/{id}")
-    public Shelter deleteShelter(@Parameter(description = "id приюта", example = "1") @PathVariable("id") Long id) {
-        return this.shelterService.deleteShelter(id);
+    public void deleteShelter(@Parameter(description = "id приюта") @PathVariable("id") Long id) {
+        shelterService.deleteShelter(id);
     }
 
     /**
@@ -72,9 +78,9 @@ public class ShelterController {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = Shelter.class))))}, tags = "SHELTER")
     @PutMapping("/{id}")
-    public Shelter updateShelter(@Parameter(description = "Приют id", example = "1") @PathVariable("id") Long id,
-                                 @RequestBody Shelter shelter) {
-        return this.shelterService.updateShelter(id, shelter);
+    public Shelter updateShelter(@Parameter(description = "Приют id")
+                                 @PathVariable("id") Long id, @RequestBody Shelter shelter) {
+        return this.shelterService.editShelter(id, shelter);
     }
 
     /**
@@ -102,7 +108,7 @@ public class ShelterController {
             responses = {@ApiResponse(responseCode = "200", description = "Ок. Информация о приюте получена",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "SHELTER")
     @GetMapping("/get/{id}")
-    public Shelter getShelter(@Parameter(description = "id приютa", example = "1") @PathVariable("id") Long id) {
+    public Shelter getShelter(@Parameter(description = "id приюта") @PathVariable("id") Long id) {
         return this.shelterService.getShelter(id);
     }
 }

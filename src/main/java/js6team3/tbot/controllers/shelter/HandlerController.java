@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import js6team3.tbot.entity.shelter.Handler;
 import js6team3.tbot.service.shelter.HandlerService;
@@ -23,6 +24,12 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/handler")
 @Tag(name = "Информация о рекомендованных кинологах", description = "CRUD-операции с кинолагами собак")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "ОК. Данные кинолога успешно загружены/получены/обновлены"),
+        @ApiResponse(responseCode = "400", description = "Ошибка 400. Параметры запроса некорректны"),
+        @ApiResponse(responseCode = "404", description = "Ошибка 404. Неправильный id. Результат запроса равен NULL"),
+        @ApiResponse(responseCode = "500", description = "Ошибка 500. Внутренняя ошибка программы")
+})
 public class HandlerController {
     private final HandlerService handlerService;
 
@@ -50,14 +57,13 @@ public class HandlerController {
      * The handler's remove
      *
      * @param id The handler's id
-     * @return Delete the handler
      */
     @Operation(summary = "Удаление кинолога по id",
             responses = {@ApiResponse(responseCode = "200", description = "ОК.Кинолог удален",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))}, tags = "Handler")
     @DeleteMapping("/{id}")
-    public Handler delete(@Parameter(description = "id кинолога", example = "1") @PathVariable("id") Long id) {
-        return this.handlerService.delete(id);
+    public void delete(@Parameter(description = "id кинолога") @PathVariable("id") Long id) {
+        handlerService.delete(id);
     }
 
     /**
