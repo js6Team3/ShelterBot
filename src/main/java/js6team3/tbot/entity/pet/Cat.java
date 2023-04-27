@@ -1,5 +1,6 @@
-package js6team3.tbot.entity;
+package js6team3.tbot.entity.pet;
 
+import js6team3.tbot.entity.User;
 import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -8,14 +9,13 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Сущность: Cat
+ * Entity: Cat
  *
  * @author Юрий Калынбаев
+ * @author zalex14
+ * @version 2.0
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -23,7 +23,7 @@ import java.util.List;
 public class Cat {
 
     /**
-     * поле "id" - идентификатор экземпляра класса
+     * The cat's id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,31 +32,31 @@ public class Cat {
     private Long id;
 
     /**
-     * поле "nickname" - кличка
+     * The cat's nickname (кличка)
      */
     @Column(name = "nick_name")
     private String nickname;
 
     /**
-     * поле "breed" - порода
+     * The cat's breed (порода)
      */
     @Column(name = "breed")
     private String breed;
 
     /**
-     * поле "age" - возраст
+     * The cat's age
      */
     @Column(name = "age")
     private int age;
 
     /**
-     * поле "description" - описание
+     * The cat;s features and info
      */
     @Column(name = "description")
     private String description;
 
     /**
-     * Связь "один ко многим"
+     * A link to the cat's user
      */
     @OneToMany(mappedBy = "cat", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.TRUE)

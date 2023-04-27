@@ -1,10 +1,10 @@
-package js6team3.tbot.service;
+package js6team3.tbot.service.pet;
 
-import js6team3.tbot.entity.Dog;
-import js6team3.tbot.exception.DogNullParameterValueException;
+import js6team3.tbot.entity.pet.Dog;
+import js6team3.tbot.exception.NullValueException;
 import js6team3.tbot.exception.ValidationException;
 import js6team3.tbot.telegram.TBotListener;
-import js6team3.tbot.repository.DogRepository;
+import js6team3.tbot.repository.pet.DogRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Сервис для работы с сущностью "Dog"
+ * Service Dog
  *
  * @author Юрий Калынбаев
+ * @author zalex14
+ * @version 1.0
  */
 @Service
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class DogService {
      * @throws ValidationException Calls methodValidationException(message) // @zalex14
      * @see DogRepository
      */
-    public Dog createDogInDB(Dog dog) {
+    public Dog createDog(Dog dog) {
         String methodName = new Object() {
         }
                 .getClass()
@@ -49,7 +51,7 @@ public class DogService {
                 .getName();
         logger.info("Текущий метод - " + methodName);
         if (dog.getNickname() == null || dog.getNickname().isBlank() || dog.getNickname().isEmpty()) {
-            throw new DogNullParameterValueException("Кличка питомца не указана");
+            throw new NullValueException("Кличка питомца не указана");
         }
         return dogRepository.save(dog);
     }
@@ -95,7 +97,7 @@ public class DogService {
             replaceDog.setAge(dog.getAge());
             replaceDog.setDescription(dog.getDescription());
         } else {
-            throw new DogNullParameterValueException("Недостаточно данных при попытке заменить данные у объекта Dog");
+            throw new NullValueException("Недостаточно данных при попытке заменить данные у объекта Dog");
         }
         return dogRepository.save(replaceDog);
     }

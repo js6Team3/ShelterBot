@@ -1,8 +1,9 @@
 package js6team3.tbot.service;
 
-import js6team3.tbot.entity.Dog;
-import js6team3.tbot.exception.DogNullParameterValueException;
-import js6team3.tbot.repository.DogRepository;
+import js6team3.tbot.entity.pet.Dog;
+import js6team3.tbot.exception.NullValueException;
+import js6team3.tbot.repository.pet.DogRepository;
+import js6team3.tbot.service.pet.DogService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -44,8 +45,8 @@ class DogServiceTest {
 
     @Test
     void testGetAllDogsSecondTest() {
-        when(dogRepository.findAll()).thenThrow(new DogNullParameterValueException("Message"));
-        assertThrows(DogNullParameterValueException.class, () -> dogService.getAllDogs());
+        when(dogRepository.findAll()).thenThrow(new NullValueException("Message"));
+        assertThrows(NullValueException.class, () -> dogService.getAllDogs());
         verify(dogRepository).findAll();
     }
 
@@ -67,7 +68,7 @@ class DogServiceTest {
         dog1.setAge(2);
         dog1.setDescription("Они энергичны и нуждаются в активности, прогулках, нагрузках.");
 
-        assertSame(dog, dogService.createDogInDB(dog1));
+        assertSame(dog, dogService.createDog(dog1));
         verify(dogRepository).save((Dog) any());
     }
 
@@ -121,7 +122,7 @@ class DogServiceTest {
         dog.setAge(2);
         dog.setDescription("Они энергичны и нуждаются в активности, прогулках, нагрузках.");
 
-        when(dogRepository.save((Dog) any())).thenThrow(new DogNullParameterValueException("Message"));
+        when(dogRepository.save((Dog) any())).thenThrow(new NullValueException("Message"));
         when(dogRepository.findById((Long) any())).thenReturn(Optional.of(dog));
 
         Dog dog1 = new Dog();
@@ -131,7 +132,7 @@ class DogServiceTest {
         dog1.setAge(2);
         dog1.setDescription("Они энергичны и нуждаются в активности, прогулках, нагрузках.");
 
-        assertThrows(DogNullParameterValueException.class, () -> dogService.replaceDogById(5L, dog1));
+        assertThrows(NullValueException.class, () -> dogService.replaceDogById(5L, dog1));
         verify(dogRepository).save((Dog) any());
         verify(dogRepository).findById((Long) any());
     }
