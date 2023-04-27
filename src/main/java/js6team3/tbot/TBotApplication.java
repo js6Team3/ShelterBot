@@ -3,6 +3,7 @@ package js6team3.tbot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author JS6_Team3
@@ -10,7 +11,7 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @SpringBootApplication
 @EnableCaching
-//@EnableScheduling
+@EnableScheduling
 public class TBotApplication {
 
     public static void main(String[] args) {

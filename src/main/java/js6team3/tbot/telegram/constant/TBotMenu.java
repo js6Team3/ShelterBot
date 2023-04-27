@@ -3,15 +3,16 @@ package js6team3.tbot.telegram.constant;
 /**
  * The Bot menu
  */
-public class TBotConstant {
+public class TBotMenu {
     /**
      * the standard first greeting
      */
     public static final String GREETING = """
-            Бот приветствует нового пользователя, рассказывает о себе и просит пользователя выбрать приют:\s
+            Данный бот позволяет прямо сейчас выбрать пиют и познакомиться с питомцами, или пригласить волонтера:\s
             1 - Приют для кошек
             2 - Приют для собак
-            0 - Позвать волонтера""";
+            0 - Позвать волонтера
+            Жду комманды""";
     /**
      * select of the bot menu
      */
