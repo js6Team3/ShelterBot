@@ -2,7 +2,7 @@ package js6team3.tbot.service;
 
 import js6team3.tbot.entity.Dog;
 import js6team3.tbot.entity.DogPhoto;
-import js6team3.tbot.listener.TBotListener;
+import js6team3.tbot.telegram.TBotListener;
 import js6team3.tbot.repository.DogPhotoRepository;
 import js6team3.tbot.repository.DogRepository;
 import lombok.RequiredArgsConstructor;

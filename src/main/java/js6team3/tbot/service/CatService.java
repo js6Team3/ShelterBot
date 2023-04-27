@@ -3,7 +3,7 @@ package js6team3.tbot.service;
 import js6team3.tbot.entity.Cat;
 import js6team3.tbot.exception.CatNullParameterValueException;
 import js6team3.tbot.exception.ValidationException;
-import js6team3.tbot.listener.TBotListener;
+import js6team3.tbot.telegram.TBotListener;
 import js6team3.tbot.repository.CatRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

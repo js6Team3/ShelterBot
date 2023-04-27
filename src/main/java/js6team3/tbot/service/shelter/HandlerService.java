@@ -2,7 +2,7 @@ package js6team3.tbot.service.shelter;
 
 import js6team3.tbot.entity.shelter.Handler;
 import js6team3.tbot.exception.NullValueException;
-import js6team3.tbot.telegram.listener.TBotListener;
+import js6team3.tbot.telegram.TBotListener;
 import js6team3.tbot.repository.shelter.HandlerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

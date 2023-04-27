@@ -1,4 +1,4 @@
-package js6team3.tbot.telegram.listener;
+package js6team3.tbot.telegram;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
