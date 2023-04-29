@@ -2,7 +2,7 @@ package js6team3.tbot.service;
 
 import js6team3.tbot.entity.pet.Dog;
 import js6team3.tbot.entity.User;
-import js6team3.tbot.exception.UsersNullParameterValueException;
+import js6team3.tbot.exception.NullValueException;
 import js6team3.tbot.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,8 +45,8 @@ class UsersServiceTest {
 
     @Test
     void testGetAllUsersSecond() {
-        when(userRepository.findAll()).thenThrow(new UsersNullParameterValueException("Message"));
-        assertThrows(UsersNullParameterValueException.class, () -> userService.getAllUsers());
+        when(userRepository.findAll()).thenThrow(new NullValueException("Message"));
+        assertThrows(NullValueException.class, () -> userService.getAllUsers());
         verify(userRepository).findAll();
     }
 
@@ -95,7 +95,7 @@ class UsersServiceTest {
         user1.setUserEmail("ivan.ivanov@example.org");
         user1.setUserPhoneNumber("5555555555");
 
-        assertThrows(UsersNullParameterValueException.class, () -> userService.createUserInDb(user1));
+        assertThrows(NullValueException.class, () -> userService.createUserInDb(user1));
 
         verify(user1, atLeast(1)).getFirstName();
         verify(user1, atLeast(1)).getUserPhoneNumber();
@@ -149,7 +149,7 @@ class UsersServiceTest {
         user1.setUserEmail("ivan.ivanov@example.org");
         user1.setUserPhoneNumber("5555555555");
 
-        assertThrows(UsersNullParameterValueException.class, () -> userService.createUserInDb(user1));
+        assertThrows(NullValueException.class, () -> userService.createUserInDb(user1));
         verify(user1, atLeast(1)).getFirstName();
         verify(user1, atLeast(1)).getUserPhoneNumber();
         verify(user1).setDog((Dog) any());
@@ -203,7 +203,7 @@ class UsersServiceTest {
         user1.setUserEmail("ivan.ivanov@example.org");
         user1.setUserPhoneNumber("5555555555");
 
-        assertThrows(UsersNullParameterValueException.class, () -> userService.createUserInDb(user1));
+        assertThrows(NullValueException.class, () -> userService.createUserInDb(user1));
         verify(user1).setDog((Dog) any());
         verify(user1).setFirstName((String) any());
         verify(user1).setId((Long) any());
@@ -243,8 +243,8 @@ class UsersServiceTest {
 
     @Test
     void testDeleteUserSecond() {
-        when(userRepository.findById((Long) any())).thenThrow(new UsersNullParameterValueException("Message"));
-        assertThrows(UsersNullParameterValueException.class, () -> userService.deleteUserById(5L));
+        when(userRepository.findById((Long) any())).thenThrow(new NullValueException("Message"));
+        assertThrows(NullValueException.class, () -> userService.deleteUserById(5L));
         verify(userRepository).findById((Long) any());
     }
 
@@ -306,10 +306,10 @@ class UsersServiceTest {
         user1.setUserEmail("ivan.ivanov@example.org");
         user1.setUserPhoneNumber("5555555555");
 
-        when(userRepository.save((User) any())).thenThrow(new UsersNullParameterValueException("Message"));
+        when(userRepository.save((User) any())).thenThrow(new NullValueException("Message"));
         when(userRepository.findById((Long) any())).thenReturn(Optional.of(user1));
 
-        assertThrows(UsersNullParameterValueException.class, () -> userService.replaceUserById(5L, user1));
+        assertThrows(NullValueException.class, () -> userService.replaceUserById(5L, user1));
         verify(userRepository).save((User) any());
         verify(userRepository).findById((Long) any());
     }
@@ -333,7 +333,7 @@ class UsersServiceTest {
 
         when(userRepository.findById((Long) any())).thenReturn(Optional.empty());
 
-        assertThrows(UsersNullParameterValueException.class, () -> userService.replaceUserById(5L, user1));
+        assertThrows(NullValueException.class, () -> userService.replaceUserById(5L, user1));
         verify(userRepository).findById((Long) any());
     }
 

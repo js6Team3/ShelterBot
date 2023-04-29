@@ -1,7 +1,7 @@
 package js6team3.tbot.service;
 
 import js6team3.tbot.entity.pet.Cat;
-import js6team3.tbot.exception.CatNullParameterValueException;
+import js6team3.tbot.exception.NullValueException;
 import js6team3.tbot.repository.pet.CatRepository;
 import js6team3.tbot.service.pet.CatService;
 import org.junit.jupiter.api.Test;
@@ -45,8 +45,8 @@ class CatServiceTest {
 
     @Test
     void testGetAllCatsSecond() {
-        when(catRepository.findAll()).thenThrow(new CatNullParameterValueException("Message"));
-        assertThrows(CatNullParameterValueException.class, () -> catService.getAllCats());
+        when(catRepository.findAll()).thenThrow(new NullValueException("Message"));
+        assertThrows(NullValueException.class, () -> catService.getAllCats());
         verify(catRepository).findAll();
     }
 
@@ -134,7 +134,7 @@ class CatServiceTest {
                 " уверенно покоряющие сердца «кошатников» по всему земному шару и отличающиеся: грациозностью," +
                 " невероятным умом, разговорчивостью и активностью… а их повадки чем-то напоминают собачьи.");
 
-        when(catRepository.save((Cat) any())).thenThrow(new CatNullParameterValueException("Message"));
+        when(catRepository.save((Cat) any())).thenThrow(new NullValueException("Message"));
         when(catRepository.findById((Long) any())).thenReturn(Optional.of(cat));
 
         Cat cat1 = new Cat();
@@ -146,7 +146,7 @@ class CatServiceTest {
                 " уверенно покоряющие сердца «кошатников» по всему земному шару и отличающиеся: грациозностью," +
                 " невероятным умом, разговорчивостью и активностью… а их повадки чем-то напоминают собачьи.");
 
-        assertThrows(CatNullParameterValueException.class, () -> catService.replaceCatById(7L, cat1));
+        assertThrows(NullValueException.class, () -> catService.replaceCatById(7L, cat1));
         verify(catRepository).save((Cat) any());
         verify(catRepository).findById((Long) any());
     }
